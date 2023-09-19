@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { environment  } from 'src/enviroments';
 import { Users } from 'src/app/models/users/users';
 import { Observable, tap } from 'rxjs';
@@ -12,6 +12,7 @@ export class LoginServiceService {
   constructor(private httpClient: HttpClient) { }
 
   API = environment.apiUrl;
+  private authToken: string;
 
   getUser(): Observable<any>{
 
@@ -25,13 +26,17 @@ export class LoginServiceService {
 
   }
 
-  loginForm(user: Users): Observable<any>{
+  loginForm(user: Users) {
     return this.httpClient.post(`${this.API}/login`, user).pipe(
-      tap(res => {
-        if(!res){
-          console.log(res);
-        }
+      tap((data: any) => {
+        // Simulación de inicio de sesión exitoso
+
+          this.authToken = data.token; // Almacena el token en el cliente
+          localStorage.setItem('nombreUsuario', user.nombre); // Almacena el nombre en el localStorage
+          localStorage.setItem('foto', data.foto);
+          localStorage.setItem('id', data.id_user);
+
       })
-    )
+    );
   }
 }

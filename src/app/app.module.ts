@@ -12,13 +12,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RegisterComponentComponent } from './components/register-component/register-component.component';
 import { LoginComponentComponent } from './components/login-component/login-component.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { HistoriasComponent } from './components/historias/historias.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponentComponent,
     LoginComponentComponent,
-
+    NavbarComponent,
+    HomeComponent,
+    HistoriasComponent,
   ],
   imports: [
     BrowserModule,

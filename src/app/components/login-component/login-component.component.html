@@ -4,17 +4,20 @@
 <form #f="ngForm" (ngSubmit)="f.valid && loginForm(f)">
 
 
-<div class="form-floating mb-3">
-  <input type="email" class="form-control" id="floatingInput" placeholder="Username" required>
-  <label for="floatingInput">Username</label>
-</div>
-<div class="form-floating">
-  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
-  <label for="floatingPassword">Password</label>
-</div>
-<div class="container-sm mt-3 ">
-  <button class="btn btn-success" type="submit">Enviar</button>
-</div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" name="nombre" placeholder="Username" ngModel required>
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" ngModel required>
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="container-sm">
+      <label *ngIf="error" class="text-danger ">*Revise sus campos correctamente</label>
+    </div>
+    <div class="container-sm mt-3 ">
+      <button class="btn btn-success" type="submit">Enviar</button>
+    </div>
 
 </form>
 

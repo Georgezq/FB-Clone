@@ -1,6 +1,6 @@
 export interface Users{
-  id: number,
-  name: string,
+  id_user?: number,
+  nombre: string,
   password: string,
-  rol: string
+  foto?: string
 }

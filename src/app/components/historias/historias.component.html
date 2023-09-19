@@ -1,0 +1,144 @@
+<div class="container-sm mt-5 pt-5 d-flex" id="all-content">
+
+  <div class="container-sm w-100" id="user-content">
+    <div class="container-fluid  pt-4 pb-1 " id="userstory">
+
+      <div class="container-img">
+        <img class="img-fluid" src="{{imguser}}" alt="" id="fotoUser">
+      </div>
+
+      <div class="container-bottom">
+
+      <div class="container-btn" id="btn">
+        <button class="btn text-white f-bold " type="button"data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
+
+
+                <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #myModal>
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Subir Historia</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <form enctype="multipart/form-data" #f="ngForm" (ngSubmit)="f.valid && storyForm(f)">
+
+                  <input type="text" name="id_usuario" value="{{id_usuario}}" [(ngModel)]="id_usuario" hidden>
+
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" name="contenidoTexto" [(ngModel)]="newStory.contenidoTexto" >
+                    <label for="floatingInput">Texto... (Puede ir vacío)</label>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput"  name="contenidoMedia" [(ngModel)]="newStory.contenidoMedia" required>
+                    <label for="floatingInput">Link...</label>
+                  </div>
+
+                <!-- <div class="input-group mb-3">
+                  <input type="file" class="form-control" id="inputGroupFile02" name="contenidoMedia">
+                  <label class="input-group-text" for="inputGroupFile02">Subir</label>
+                </div> -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                </div>
+
+              </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container-text">
+        <p class="text-white">Crear historia</p>
+      </div>
+
+    </div>
+
+    </div>
+  </div>
+
+  <div class="container-sm" *ngFor="let story of historias ; let i = index">
+    <div class="container-img pt-3">
+      <!-- Verifica si el enlace es una imagen -->
+      <ng-container *ngIf="isImageLink(story.contenidoMedia)">
+        <!-- Si es una imagen, muestra la etiqueta <img> -->
+        <a type="button" (click)="openModal(story.id_usuario)" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal-' + story.id_usuario">
+          <img [src]="story.contenidoMedia" alt="" id="historia">
+        </a>
+      </ng-container>
+      <!-- Verifica si el enlace es un video -->
+      <ng-container *ngIf="isVideoLink(story.contenidoMedia)">
+        <!-- Si es un video, muestra la etiqueta <video> -->
+          <a type="button" (click)="openModal(story.id_usuario)" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal-' + story.id_usuario">
+            <video [src]="story.contenidoMedia"  id="historia"></video>
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="user">
+        <div class="container" id="userContainer">
+          <img class="img-fluid" [src]="getUsuarioFoto(story.id_usuario)" alt="" id="fotoUserHistoria">
+        </div>
+        <p class="text-white" id="names">{{ getUsuarioNombre(story.id_usuario) }}</p>
+      </ng-container>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+
+
+<ng-container *ngFor="let story of historias  ; let i = index">
+
+  <div class="modal fade"  [id]="'exampleModal-' + story.id_usuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header ">
+          <h1 class="modal-title text-center fs-5" id="staticBackdropLabel">Historias</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center" >
+
+          <div *ngIf="showHistoria.length > 0">
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let story of showHistoria; let i = index" [class.active]="i === 0">
+                  <ng-container *ngIf="isImageLink(story.contenidoMedia)">
+                    <img [src]="story.contenidoMedia" class="d-block w-100" alt="Image" id="edit">
+                  </ng-container>
+                  <ng-container *ngIf="isVideoLink(story.contenidoMedia)">
+                    <video [src]="story.contenidoMedia" class="d-block w-100" controls id="edit"></video>
+                  </ng-container>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

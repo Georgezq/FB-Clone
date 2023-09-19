@@ -1,0 +1,89 @@
+#all-content{
+width: 50%;
+border: 2px solid none;
+border-radius: 12px;
+background-color: rgb(64, 61, 61);
+}
+
+#user-content{
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+#userstory{
+  width: 75%;
+}
+
+#fotoUser{
+  border: 2px solid;
+  border-radius: 12px;
+  max-height: 250px;
+  width: 200px;
+  object-fit: cover;
+}
+
+#historia{
+  border: 2px solid;
+  border-radius: 12px;
+  height: 300px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.container-bottom{
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  position: relative;
+  border-radius: 12px;
+  background-color: rgb(33, 31, 31);
+  bottom: 30px;
+  width: 100%;
+  margin: auto;
+}
+
+#btn{
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: auto;
+  width: 40px;
+  background-color: rgb(85, 77, 196);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+p{
+  text-align: center;
+}
+
+#fotoUserHistoria{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: 2px solid blue;
+  object-fit: cover;
+
+}
+
+#userContainer{
+  position: relative;
+  bottom: 290px;
+
+}
+
+#names{
+  position: relative;
+  bottom: 90px;
+  right: 90px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#edit{
+  height: 400px;
+  object-fit: contain;
+}
+
+
