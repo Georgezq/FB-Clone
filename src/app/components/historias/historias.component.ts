@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Comentario } from 'src/app/models/comentario';
 import { Historias } from 'src/app/models/historias';
 import { Users } from 'src/app/models/users/users';
+import { ComentarioService } from 'src/app/services/user/comentario.service';
 import { StoryUserService } from 'src/app/services/user/story-user.service';
 import { UsersService } from 'src/app/services/user/users.service';
 
@@ -19,6 +21,7 @@ export class HistoriasComponent implements OnInit{
   showHistoria: Historias[] = [];
   aaa: Historias[] = [];
   @ViewChild('myModal') myModal: ElementRef;
+  @ViewChild('myInput') myInput: ElementRef;
 
 
 
@@ -26,6 +29,7 @@ export class HistoriasComponent implements OnInit{
   userlogged;
   imguser;
   id_usuario: number = 0;
+  comentario: Comentario[] = [];
 
   newStory: Historias = {
 
@@ -34,12 +38,19 @@ export class HistoriasComponent implements OnInit{
     id_usuario: this.id_usuario,
   }
 
+  newComentario: Comentario = {
+    contenido: '',
+    reaccion: 'si',
+    id_historia: 0,
+    id_usuario: this.id_usuario
+  }
+
   isModalOpen: boolean = false;
   selectedUserId: number | null = null; // Nuevo: seguimiento del usuario seleccionado para el modal
 
 
 
-  constructor(private userService: UsersService, private storyService: StoryUserService, private renderer: Renderer2){
+  constructor(private userService: UsersService, private storyService: StoryUserService, private renderer: Renderer2, private comentarioService: ComentarioService){
 
   }
   ngOnInit(): void {
@@ -47,6 +58,13 @@ export class HistoriasComponent implements OnInit{
       user: Users[]) => {
         this.user = user;
         this.userService.setUser(user);
+      }
+    );
+
+    this.comentarioService.getComentario().subscribe((
+      comentario: Comentario[]) => {
+        this.comentario = comentario;
+        this.comentarioService.setComentario(comentario);
       }
     );
 
@@ -138,13 +156,23 @@ isVideoLink(link: string): boolean {
           console.log(res)
           // Cierra el formulario
           this.renderer.setStyle(this.myModal.nativeElement, 'display', 'none');
+          this.historias.push(form.value)
           form.resetForm();
         }
       )
     }
+  }
 
-
-
+  commentForm(form: NgForm){
+    if(form.valid){
+      this.comentarioService.addComentario(form.value).subscribe(
+        (res) => {
+          console.log(res);
+         this.comentario.push(form.value);
+         this.renderer.setValue(this.myInput.nativeElement, '');
+        }
+      )
+    }
   }
 
   openModal(id_usuario: number) {

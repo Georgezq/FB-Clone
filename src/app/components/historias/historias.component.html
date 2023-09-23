@@ -120,8 +120,66 @@
                   <ng-container *ngIf="isVideoLink(story.contenidoMedia)">
                     <video [src]="story.contenidoMedia" class="d-block w-100" controls id="edit"></video>
                   </ng-container>
+
+                  <ng-container class="mt-5" >
+
+                    <form enctype="multipart/form-data" #f="ngForm" (ngSubmit)="f.valid && commentForm(f)">
+
+                    <input type="text" name="id_historia" [(ngModel)]="story.id_historia" hidden>
+
+                    <input type="text" name="id_usuario" [(ngModel)]="id_usuario" hidden>
+
+                    <input type="text" name="reaccion" [(ngModel)]="newComentario.reaccion" hidden>
+
+
+                    <div class="form-floating mt-3 mb-3">
+                      <input #myInput type="email" class="form-control" id="floatingInput" name="contenido" [(ngModel)]="newComentario.contenido">
+                      <label for="floatingInput">Comentario...</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary pe-3" >Publicar</button>
+
+
+
+                  </form>
+
+                  </ng-container>
+
+
+
+
+                  <ng-container *ngFor="let comentario of comentario" >
+                    <div class="container" style="max-height: 200px; overflow-y: auto;">
+                    <div class="form-floating mt-3 mb-1" *ngIf="comentario.id_historia === story.id_historia" >
+                      <div class="form-floating mt-3 mb-1 d-flex" *ngFor="let usuario of user" >
+                        <div class="row" *ngIf="comentario.id_usuario === usuario.id_user">
+                          <div class="col">
+                            <div class="d-flex align-items-center">
+                              <div id="foto-comment">
+                                <img class="img-fluid" [src]="getUsuarioFoto(comentario.id_usuario)" alt="" id="fotoUserHistoria">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-10 w-75 mx-auto pb-1" id="comentario">
+                            <div class="fw-bold">
+                              <p class="text-dark text-start">{{ getUsuarioNombre(comentario.id_usuario) }}</p>
+                            </div>
+                            <div> <!-- Ajusta la altura máxima según tus necesidades -->
+                              <input type="email" class="form-control" id="floatingInput" [(ngModel)]="comentario.contenido" readonly>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </ng-container>
+
+
                 </div>
+
+
               </div>
+
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
