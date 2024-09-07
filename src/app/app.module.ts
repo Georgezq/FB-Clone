@@ -10,8 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 //Components
 
-import { RegisterComponentComponent } from './components/register-component/register-component.component';
-import { LoginComponentComponent } from './components/login-component/login-component.component';
+import { RegisterComponentComponent } from './auth/register-component/register-component.component';
+import { LoginComponentComponent } from './auth/login-component/login-component.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { HistoriasComponent } from './components/historias/historias.component';
