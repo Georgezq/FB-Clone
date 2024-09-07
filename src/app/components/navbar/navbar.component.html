@@ -1,24 +1,24 @@
 <nav>
   <ul>
-      <li> <a href="#" id="fb"> <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><style>svg{fill:#ffffff}</style><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg> </a> </li>
-      <li> <button id="search_btn" class="tooltip" data-tooltip="Search"> <i class="bi bi-search    "></i> </button> </li>
+    <li> <a [href]="'home'" class="fb"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="url(#a)" height="40"
+          width="40">
+          <defs>
+            <linearGradient x1="50%" x2="50%" y1="97.078%" y2="0%" id="a">
+              <stop offset="0%" stop-color="#0062E0" />
+              <stop offset="100%" stop-color="#19AFFF" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M15 35.8C6.5 34.3 0 26.9 0 18 0 8.1 8.1 0 18 0s18 8.1 18 18c0 8.9-6.5 16.3-15 17.8l-1-.8h-4l-1 .8z" />
+          <path fill="#FFF"
+            d="m25 23 .8-5H21v-3.5c0-1.4.5-2.5 2.7-2.5H26V7.4c-1.3-.2-2.7-.4-4-.4-4.1 0-7 2.5-7 7v4h-4.5v5H15v12.7c1 .2 2 .3 3 .3s2-.1 3-.3V23h4z" />
+        </svg> </a> </li>
+    <li> 
+      <input id="search_btn" placeholder="Buscar en Facebook"> 
+      <i class="bi bi-search "></i> 
+    </li>
 
-      <li id="space2"></li>
-
-      <div class="container-sm">
-
-        <div class="content-icon">
-      <li> <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="bi bi-house    "></i> </a> </li>
-        </div>
-      <li> <a class="tooltip" data-tooltip="Group" href="#" id="group"> <i class="bi bi-person-fill-add    "></i> </a></li>
-      <li> <a class="tooltip" data-tooltip="Watch" href="#" id="tv"> <i class="bi bi-tv    "></i> </a> </li>
-      <li> <a class="tooltip" data-tooltip="Friend" href="#" id="friend"> <i class="bi bi-people    "></i> </a> </li>
-    </div>
-
-      <li id="space1"></li>
-      <li> <button class="tooltip" data-tooltip="Add" id="btn_plus"><i class="bi bi-plus    "></i></button> </li>
-      <li> <button class="tooltip" data-tooltip="Message" id="btn_msg"><i class="bi bi-messenger    "></i></button></li>
-      <li> <button class="tooltip" data-tooltip="Notification" id="btn_bell"> <i class="bi bi-bell    "></i></button></li>
-      <li>  <button class="tooltip" data-tooltip="Profile" id="btn_profile"><i class="bi bi-person-fill-gear    "></i></button>  </li>
+    <li id="space2"></li>
+   
   </ul>
 </nav>
