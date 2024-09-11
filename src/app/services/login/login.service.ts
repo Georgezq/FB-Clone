@@ -12,7 +12,7 @@ export class LoginServiceService {
   constructor(private httpClient: HttpClient) { }
 
   API = environment.apiUrl;
-  private authToken: string;
+  private authToken: string = '';
 
   getUser(): Observable<any>{
 

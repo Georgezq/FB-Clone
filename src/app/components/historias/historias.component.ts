@@ -20,14 +20,14 @@ export class HistoriasComponent implements OnInit{
   historias: Historias[] = [];
   showHistoria: Historias[] = [];
   aaa: Historias[] = [];
-  @ViewChild('myModal') myModal: ElementRef;
-  @ViewChild('myInput') myInput: ElementRef;
+  @ViewChild('myModal') myModal: ElementRef = new ElementRef('myModal');
+  @ViewChild('myInput') myInput: ElementRef = new ElementRef('input');;
 
 
 
 
-  userlogged;
-  imguser;
+  userlogged: any;
+  imguser: any;
   id_usuario: number = 0;
   comentario: Comentario[] = [];
 

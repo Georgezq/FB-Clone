@@ -10,8 +10,8 @@ import { environment } from 'src/enviroments';
 export class UsersService {
 
   users: Users[] = [];
-  authService: any;
-  usuarioLogged: string;
+  authService: string = '';
+  usuarioLogged: string = '';
 
 
   constructor(private httpClient: HttpClient) { }
