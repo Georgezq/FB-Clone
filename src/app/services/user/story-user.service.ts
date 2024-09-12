@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Historias } from 'src/app/models/historias';
-import { environment } from 'src/enviroments';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ import { environment } from 'src/enviroments';
 export class StoryUserService {
 
   historias: Historias[] = [];
-  API_URL1 = environment.apiUrl;
+  API_URL1 = '';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Component } from '@angular/core';
 import { Comentario } from 'src/app/models/comentario';
-import { environment } from 'src/enviroments';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ import { environment } from 'src/enviroments';
 export class ComentarioService {
 
   comentario: Comentario[] = [];
-  API_URL1 = environment.apiUrl;
+  API_URL1 = '';
 
   constructor(private httpClient: HttpClient) { }
 

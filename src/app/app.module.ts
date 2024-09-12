@@ -16,6 +16,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { HistoriasComponent } from './components/historias/historias.component';
 
+//Firebase
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { environment } from 'src/environments/enviroments';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +36,11 @@ import { HistoriasComponent } from './components/historias/historias.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]

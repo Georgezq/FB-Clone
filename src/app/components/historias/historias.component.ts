@@ -54,12 +54,12 @@ export class HistoriasComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((
-      user: Users[]) => {
-        this.user = user;
-        this.userService.setUser(user);
-      }
-    );
+    // this.userService.getUsers().subscribe((
+    //   user: Users[]) => {
+    //     this.user = user;
+    //     this.userService.setUser(user);
+    //   }
+    // );
 
     this.comentarioService.getComentario().subscribe((
       comentario: Comentario[]) => {

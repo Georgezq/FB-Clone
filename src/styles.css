@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+.btn-green-fb{
+    background-color: #42b72a;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-green-fb:hover{
+    background-color: #359423;
+    color: white;
+}

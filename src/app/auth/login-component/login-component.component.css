@@ -13,10 +13,6 @@ section{
   justify-content: center;
 }
 
-#new_account{
-  background-color: #42b72a;
-}
-
 #forgot_paswd:hover{
   text-decoration: underline;
 }

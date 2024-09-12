@@ -24,16 +24,16 @@ export class LoginComponentComponent implements OnInit {
 
 
   loginForm(form: NgForm): void {
-    if (form.valid) {
-      this.loginS.loginForm(form.value).subscribe(
-        (data) => {
-          this.router.navigateByUrl('/home');
-        },
-        (error) => {
-          this.error = true;
-        }
-      );
-    }
+    // if (form.valid) {
+    //   this.loginS.loginForm(form.value).subscribe(
+    //     (data) => {
+    //       this.router.navigateByUrl('/home');
+    //     },
+    //     (error) => {
+    //       this.error = true;
+    //     }
+    //   );
+    // }
   }
 
 }

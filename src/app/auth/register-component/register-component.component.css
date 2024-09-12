@@ -1,0 +1,11 @@
+input{
+    background-color: #f5f6f7;
+}
+
+label{
+    font-size: 16px;
+}
+
+input::placeholder{
+    font-size: 12px;
+}
