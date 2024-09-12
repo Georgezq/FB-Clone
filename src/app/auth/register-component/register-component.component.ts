@@ -25,10 +25,16 @@ export class RegisterComponentComponent {
   }
 
   registerWithEmailAndPassword(){
-   this.userService.registerForm(this.registerUser.value).then(
-    (res) => {
+    if(this.registerUser.valid){
+      this.userService.registerForm(this.registerUser.value)
+      // limpiar formulario
+      this.registerUser.reset();
+    } else {
+      Object.keys(this.registerUser.controls).forEach(key => {
+        const control = this.registerUser.get[key];
+        control.markAsTouched();
+      })
     }
-   )
   }
 
 }

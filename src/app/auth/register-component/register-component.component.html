@@ -15,37 +15,36 @@
       </div>
       <div class="modal-body">
 
-        <form class="row g-2 needs-validation" [formGroup]="registerUser" (submit)="registerWithEmailAndPassword()" novalidate >
+        <form class="row g-2 needs-validation" [formGroup]="registerUser" (submit)="registerWithEmailAndPassword()" >
           <div class="form-floating col-md-6">
             <input type="text" class="form-control" formControlName="nombre" name="nombre" placeholder="Nombre"
-              required />
+              required [ngClass]="{'is-invalid': registerUser.get('nombre').invalid && (registerUser.get('nombre').dirty || registerUser.get('nombre').touched)}"/>
             <label for="floatingInput">Nombre</label>
-            <div class="valid-feedback">
-              Looks good!
+            <div class="invalid-feedback text-start" *ngIf="registerUser.get('nombre').invalid && (registerUser.get('nombre').dirty || registerUser.get('nombre').touched)">
+              Queremos saber como te llamas!
             </div>
           </div>
           <div class="form-floating col-md-6">
             <input type="text" class="form-control" formControlName="apellido" name="apellidos" placeholder="Apellidos" 
-              required />
+              required [ngClass]="{'is-invalid': registerUser.get('apellido').invalid && (registerUser.get('apellido').dirty || registerUser.get('apellido').touched)}"/>
             <label for="floatingInput">Apellidos</label>
-            <div class="valid-feedback">
-              Looks good!
+            <div class="invalid-feedback text-start" *ngIf="registerUser.get('apellido').invalid && (registerUser.get('apellido').dirty || registerUser.get('apellido').touched)">
+              Nos encantaria saber tu apellido.
             </div>
           </div>
           <div class="form-floating col-md-12">
-            <input type="text" class="form-control" formControlName="email" name="email" placeholder="Correo electronico" 
-              required />
+            <input type="email" class="form-control" formControlName="email" name="email" placeholder="Correo electronico" 
+              required [ngClass]="{'is-invalid': registerUser.get('email').invalid && (registerUser.get('email').dirty || registerUser.get('email').touched)}"/>
             <label for="floatingInput">Correo electronico</label>
-            <div class="valid-feedback">
-              Looks good!
+            <div class="invalid-feedback text-start" *ngIf="registerUser.get('email').invalid && (registerUser.get('email').dirty || registerUser.get('email').touched)">
+              Este campo es muy valioso, asegurate de llenarlo correctamente.
             </div>
           </div>
           <div class="form-floating col-md-12">
-            <input type="text" class="form-control" formControlName="password" name="password" placeholder="Contraseña nueva" 
-              required />
+            <input type="password" class="form-control" formControlName="password" name="password" placeholder="Contraseña nueva" 
+              required [ngClass]="{'is-invalid': registerUser.get('password').invalid && (registerUser.get('password').dirty || registerUser.get('password').touched)}"/>
             <label for="floatingInput">Contraseña nueva</label>
-            <div class="valid-feedback">
-              Looks good!
+            <div class="invalid-feedback text-start" *ngIf="registerUser.get('password').invalid && (registerUser.get('password').dirty || registerUser.get('password').touched)">              La privacidad es genial, ¿no lo crees?
             </div>
           </div>
         
