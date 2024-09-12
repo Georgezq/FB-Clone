@@ -10,6 +10,7 @@ import { LoginServiceService } from 'src/app/services/login/login.service';
 export class RegisterComponentComponent {
 
   registerUser: FormGroup | null ;
+  closeModal: string = '';
 
   constructor(private fb: FormBuilder, private userService: LoginServiceService) { 
     this.inicializarForm();
@@ -25,6 +26,7 @@ export class RegisterComponentComponent {
   }
 
   registerWithEmailAndPassword(){
+    this.closeModal = 'modal';
     if(this.registerUser.valid){
       this.userService.registerForm(this.registerUser.value)
       // limpiar formulario
