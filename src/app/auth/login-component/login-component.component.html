@@ -15,15 +15,15 @@
       <div class="col">
         <div class="form-container">
           <section class="container-fluid ">
-            <form #f="ngForm" class="card p-3 rounded-2 shadow-lg w-75 mx-auto" (ngSubmit)="f.valid && loginForm(f)">
+            <form  class="card p-3 rounded-2 shadow-lg w-75 mx-auto" [formGroup]="loginUser" (submit)="loginForm()" >
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="nombre"
-                  placeholder="Correo electrónico" ngModel required />
+                  placeholder="Correo electrónico" formControlName="email" required />
                 <label for="floatingInput">Correo electrónico</label>
               </div>
               <div class="form-floating">
                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
-                  ngModel required />
+                  formControlName="password" required />
                 <label for="floatingPassword">Contraseña</label>
               </div>
               <div class="container-sm">

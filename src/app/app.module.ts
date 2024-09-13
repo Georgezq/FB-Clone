@@ -22,6 +22,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/enviroments';
+import { MainPublicacionesComponent } from './components/publicaciones/main-publicaciones/main-publicaciones.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { environment } from 'src/environments/enviroments';
     NavbarComponent,
     HomeComponent,
     HistoriasComponent,
+    MainPublicacionesComponent,
   ],
   imports: [
     BrowserModule,

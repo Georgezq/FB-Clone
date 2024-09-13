@@ -1,22 +1,21 @@
-#all-content{
-width: 50%;
-border: 2px solid none;
-border-radius: 12px;
-background-color: rgb(64, 61, 61);
+#all-content {
+  border: 2px solid none;
+  border-radius: 12px;
+  background-color: rgb(64, 61, 61);
 }
 
-#user-content{
+#user-content {
   width: 100%;
   display: flex;
   align-items: start;
   justify-content: start;
 }
 
-#userstory{
+#userstory {
   width: 75%;
 }
 
-#fotoUser{
+#fotoUser {
   border: 2px solid;
   border-radius: 12px;
   max-height: 250px;
@@ -24,7 +23,7 @@ background-color: rgb(64, 61, 61);
   object-fit: cover;
 }
 
-#historia{
+#historia {
   border: 2px solid;
   border-radius: 12px;
   height: 300px;
@@ -32,7 +31,7 @@ background-color: rgb(64, 61, 61);
   object-fit: cover;
 }
 
-.container-bottom{
+.container-bottom {
   border-left: 2px solid;
   border-right: 2px solid;
   border-bottom: 2px solid;
@@ -44,7 +43,7 @@ background-color: rgb(64, 61, 61);
   margin: auto;
 }
 
-#btn{
+#btn {
   border: 2px solid black;
   border-radius: 50%;
   margin: auto;
@@ -54,11 +53,11 @@ background-color: rgb(64, 61, 61);
   font-size: 16px;
 }
 
-p{
+p {
   text-align: center;
 }
 
-#fotoUserHistoria{
+#fotoUserHistoria {
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -67,13 +66,13 @@ p{
 
 }
 
-#userContainer{
+#userContainer {
   position: relative;
   bottom: 290px;
 
 }
 
-#names{
+#names {
   position: relative;
   bottom: 90px;
   right: 90px;
@@ -81,10 +80,7 @@ p{
   font-weight: bold;
 }
 
-#edit{
+#edit {
   height: 400px;
   object-fit: contain;
 }
-
-
-
