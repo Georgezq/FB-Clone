@@ -1,0 +1,18 @@
+.publicacion-user{
+    border-radius: 12px;
+    background-color: #ffff;
+    padding: 20px;
+}
+
+.publication{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--content-bg);
+    border: none;
+    color: #8b8b8b;
+}
+
+.publication:hover{
+    background-color: var(--content-bg-hover);
+    cursor: pointer;
+}

@@ -1,40 +1,39 @@
-<section id="login">
-  <div class="container d-flex align-items-center justify-content-center text-center ">
-    <div class="row ">
-      <div class="col">
-        <div class="logo-container d-flex flex-column align-items-start justify-content-center">
+<section id="login" class="h-svh flex items-center justify-center ">
+  <div class="flex text-center w-[1400px]">
+    <div class="flex flex-row ">
+      <div class="basis-1/2">
+        <div class="logo-container flex flex-col items- content-center">
           <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Logo de facebook"
-            class="img-fluid w-50 h-50" />
-          <span class="fs-3 fw-medium text-opacity-75 text-start">
+            class="img-fluid size-1/2" />
+          <span class="text-3xl text-start text-[#1c1e21]">
             Facebook te ayuda a comunicarte y compartir con las personas que
             forman parte de tu vida.
           </span>
         </div>
       </div>
 
-      <div class="col">
+      <div class="basis-1/2">
         <div class="form-container">
-          <section class="container-fluid ">
-            <form  class="card p-3 rounded-2 shadow-lg w-75 mx-auto" [formGroup]="loginUser" (submit)="loginForm()" >
-              <div class="form-floating mb-3">
+          <section>
+            <form  class="card p-3 rounded-2xl shadow-lg w-[540px] mx-auto px-12" [formGroup]="loginUser" (submit)="loginForm()" >
+              <div class="mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="nombre"
                   placeholder="Correo electrónico" formControlName="email" required />
-                <label for="floatingInput">Correo electrónico</label>
+          
               </div>
-              <div class="form-floating">
+              <div class="mb-3">
                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
                   formControlName="password" required />
-                <label for="floatingPassword">Contraseña</label>
               </div>
               <div class="container-sm">
                 <label *ngIf="error" class="text-danger">*Revise sus campos correctamente</label>
               </div>
-              <div class="container-sm mt-3 w-100">
-                <button class="btn btn-primary w-100 fw-bold fs-5" type="submit">Iniciar sesión</button>
+              <div class="container-sm mt-10 w-100 flex justify-center items-center flex-col ">
+                <button class="w-full font-bold text-xl bg-[#0866ff] text-white rounded-md h-12" type="submit">Iniciar sesión</button>
                 <button id="forgot_paswd" type="button"
-                  class="w-100 btn my-3 p-2 rounded-2 border-1 shadow-sm border-white text-primary">¿Has olvidado la
+                  class="w-full btn my-3 p-2 rounded-2 border-1 shadow-md text-[#0866ff] border-white text-primary">¿Has olvidado la
                   contraseña?</button>
-                  <app-register-component />
+                  <!-- <app-register-component /> -->
               </div>
             </form>
 

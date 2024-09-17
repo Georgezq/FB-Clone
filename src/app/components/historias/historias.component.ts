@@ -23,9 +23,6 @@ export class HistoriasComponent implements OnInit{
   @ViewChild('myModal') myModal: ElementRef = new ElementRef('myModal');
   @ViewChild('myInput') myInput: ElementRef = new ElementRef('input');;
 
-
-
-
   userlogged: any;
   imguser: any;
   id_usuario: number = 0;
