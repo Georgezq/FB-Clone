@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login/login.service';
+import { FormValidators } from 'src/core/utils/FormValidators';
 
 
 @Component({
@@ -14,34 +15,36 @@ export class LoginComponentComponent  {
   error: boolean = false;
   loginUser: FormGroup | null ;
 
-  constructor(private loginS: LoginServiceService, private router: Router, private fb: FormBuilder){
+  constructor(private loginS: LoginServiceService, private router: Router, private fb: FormBuilder,
+    private formValid: FormValidators
+  ){
     this.inicializarForm();
   }
 
   private inicializarForm(){
     this.loginUser = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: new FormControl('', [Validators.required, this.formValid.customeEmailValidator]),
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
+  getError(control:any): string{
+    if(control.errors?.required && control.touched)
+      return 'Este campo es obligatorio';
+    else if(control.errors?.emailError && control.touched)
+      return 'Correo electronico no valido';
+    else return '';
+  }
+
   loginForm(): void {
-    if(this.loginUser.valid){
+    if(this.loginUser.valid) {
       this.loginS.loginForm(this.loginUser.value).then(
-        () => {
-          this.router.navigate(['home']);
-          this.loginUser.reset();
-        },
-        () => {
+        (userCredential) => {
+          this.router.navigate(['/home']);
+        }).catch((error) => {
           this.error = true;
-        }
-      );
-    } else {
-      Object.keys(this.loginUser.controls).forEach(key => {
-        const control = this.loginUser.get[key];
-        control.markAsTouched();
-      })
-    }
+        });
+    } else return null
   }
 
 }

@@ -17,9 +17,13 @@
           <section>
             <form  class="card p-3 rounded-2xl shadow-lg w-[540px] mx-auto px-12" [formGroup]="loginUser" (submit)="loginForm()" >
               <div class="mb-3">
-                <input type="text" class="form-control" id="floatingInput" name="nombre"
+                <input type="text" class="form-control"  id="floatingInput" name="email"
                   placeholder="Correo electrónico" formControlName="email" required />
-          
+                  <label class="text-danger fw-normal text-red-700" *ngIf="getError(loginUser.get('email'))">
+                    {{
+                      getError(loginUser.get('email'))
+                    }}
+                  </label>
               </div>
               <div class="mb-3">
                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
@@ -29,7 +33,7 @@
                 <label *ngIf="error" class="text-danger">*Revise sus campos correctamente</label>
               </div>
               <div class="container-sm mt-10 w-100 flex justify-center items-center flex-col ">
-                <button class="w-full font-bold text-xl bg-[#0866ff] text-white rounded-md h-12" type="submit">Iniciar sesión</button>
+                <button class="w-full font-bold text-xl bg-[#0866ff] text-white rounded-md h-12" type="submit" [disabled]="loginUser.invalid">Iniciar sesión</button>
                 <button id="forgot_paswd" type="button"
                   class="w-full btn my-3 p-2 rounded-2 border-1 shadow-md text-[#0866ff] border-white text-primary">¿Has olvidado la
                   contraseña?</button>
