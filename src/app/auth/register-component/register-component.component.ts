@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginServiceService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -11,6 +11,8 @@ export class RegisterComponentComponent {
 
   registerUser: FormGroup | null ;
   closeModal: string = '';
+  error_tooltip: string = '';
+  focusedField: string | null = null;
 
   constructor(private fb: FormBuilder, private userService: LoginServiceService) { 
     this.inicializarForm();
@@ -25,6 +27,13 @@ export class RegisterComponentComponent {
     });
   }
 
+  isInvalid(field: string): boolean {
+    const control = this.registerUser.get(field);
+    return control!.invalid && (control!.dirty || control!.touched);
+  }
+
+
+
   registerWithEmailAndPassword(){
     this.closeModal = 'modal';
     if(this.registerUser.valid){
@@ -38,5 +47,7 @@ export class RegisterComponentComponent {
       })
     }
   }
+
+  
 
 }

@@ -21,6 +21,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getStorage, provideStorage  } from '@angular/fire/storage';
 import { environment } from 'src/environments/enviroments';
 import { MainPublicacionesComponent } from './components/publicaciones/main-publicaciones/main-publicaciones.component';
 
@@ -43,7 +44,8 @@ import { MainPublicacionesComponent } from './components/publicaciones/main-publ
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
   ],
   providers: [],
   bootstrap: [AppComponent]

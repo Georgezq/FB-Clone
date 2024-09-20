@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword ,Auth } from '@angular/fire/auth';
-import { Database, getDatabase, ref, set } from '@angular/fire/database';
+import { addDoc, collection, Firestore, getFirestore } from '@angular/fire/firestore';
+
 import { Observable } from 'rxjs';
 
 import { Users } from 'src/app/models/users/users';
@@ -12,23 +13,23 @@ import { Users } from 'src/app/models/users/users';
 export class LoginServiceService {
 
   private auth: Auth;
-  private database: Database;
+  private firestore: Firestore;
 
   constructor(app: FirebaseApp) {
     this.auth = getAuth(app);
-    this.database = getDatabase(app);
+    this.firestore = getFirestore(app);
   }
 
   async registerForm(user: Users) {
     return await createUserWithEmailAndPassword(this.auth, user.email, user.password).then(
-      (userCredential) => {
-        set(ref (this.database, 'users/' + userCredential.user.uid), {
-          nombre: user.nombre,
-          apellido: user.apellido,
+      async () => {
+        await addDoc(collection(this.firestore, 'users'), {
           email: user.email,
           password: user.password,
+          nombre: user.nombre,
+          apellido: user.apellido,
+          foto: user.apellido,
         })
-      
       });
   }
 

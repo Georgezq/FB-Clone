@@ -23,7 +23,7 @@ export class LoginComponentComponent  {
 
   private inicializarForm(){
     this.loginUser = this.fb.group({
-      email: new FormControl('', [Validators.required, this.formValid.customeEmailValidator]),
+      email: new FormControl('', [Validators.required, this.formValid.customeEmailValidator, Validators.email]),
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
@@ -39,9 +39,9 @@ export class LoginComponentComponent  {
   loginForm(): void {
     if(this.loginUser.valid) {
       this.loginS.loginForm(this.loginUser.value).then(
-        (userCredential) => {
+        () => {
           this.router.navigate(['/home']);
-        }).catch((error) => {
+        }).catch(() => {
           this.error = true;
         });
     } else return null

@@ -1,61 +1,96 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-green-fb fw-bold fs-6 text-white mt-5" data-bs-toggle="modal"
-  data-bs-target="#staticBackdrop">
+<button type="button" class="btn-green-fb font-bold text-lg text-white mt-5 p-3 rounded-md"
+  data-modal-target="default-modal" data-modal-toggle="default-modal">
   Crear cuenta nueva
 </button>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header d-flex flex-column justify-content-start align-items-start">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <h1 class="modal-title fs-3 fw-bold" id="staticBackdropLabel">Registrarte</h1>
-        <span class="fw-5 text-secondary">Es rápido y fácil.</span>
+<!-- Main modal -->
+<div id="default-modal" tabindex="-1" aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative p-4 w-100 max-w-2xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+        <div class="flex flex-col">
+          <h1 class="modal-title text-3xl font-bold" id="staticBackdropLabel">
+            Registrarte
+          </h1>
+          <span class="font-normal opacity-70 text-start">Es rápido y fácil.</span>
+        </div>
+        <button type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          data-modal-hide="default-modal">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
       </div>
-      <div class="modal-body">
-
-        <form class="row g-2 needs-validation" [formGroup]="registerUser" (submit)="registerWithEmailAndPassword()" >
-          <div class="form-floating col-md-6">
-            <input type="text" class="form-control" formControlName="nombre" name="nombre" placeholder="Nombre"
-              required [ngClass]="{'is-invalid': registerUser.get('nombre').invalid && (registerUser.get('nombre').dirty || registerUser.get('nombre').touched)}"/>
-            <label for="floatingInput">Nombre</label>
-            <div class="invalid-feedback text-start" *ngIf="registerUser.get('nombre').invalid && (registerUser.get('nombre').dirty || registerUser.get('nombre').touched)">
+      <!-- Modal body -->
+      <div class="p-4 md:p-5 space-y-4">
+        <form class="grid gap-4 grid-cols-2 needs-validation" [formGroup]="registerUser"
+          (submit)="registerWithEmailAndPassword()">
+          <div class="col-span-2 sm:col-span-1">
+            <input type="text" formControlName="nombre" placeholder="Nombre" required
+              [ngClass]="{ 'is-invalid': isInvalid('nombre') }" />
+            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('nombre')">
               Queremos saber como te llamas!
             </div>
           </div>
-          <div class="form-floating col-md-6">
-            <input type="text" class="form-control" formControlName="apellido" name="apellidos" placeholder="Apellidos" 
-              required [ngClass]="{'is-invalid': registerUser.get('apellido').invalid && (registerUser.get('apellido').dirty || registerUser.get('apellido').touched)}"/>
-            <label for="floatingInput">Apellidos</label>
-            <div class="invalid-feedback text-start" *ngIf="registerUser.get('apellido').invalid && (registerUser.get('apellido').dirty || registerUser.get('apellido').touched)">
+          <div class="col-span-2 sm:col-span-1">
+            <input type="text" formControlName="apellido" placeholder="Apellidos" required
+              [ngClass]="{ 'is-invalid': isInvalid('apellido') }" />
+            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('apellido')">
               Nos encantaria saber tu apellido.
             </div>
           </div>
-          <div class="form-floating col-md-12">
-            <input type="email" class="form-control" formControlName="email" name="email" placeholder="Correo electronico" 
-              required [ngClass]="{'is-invalid': registerUser.get('email').invalid && (registerUser.get('email').dirty || registerUser.get('email').touched)}"/>
-            <label for="floatingInput">Correo electronico</label>
-            <div class="invalid-feedback text-start" *ngIf="registerUser.get('email').invalid && (registerUser.get('email').dirty || registerUser.get('email').touched)">
+          <div class="col-span-2">
+            <input type="email" class="w-full" formControlName="email" placeholder="Correo electronico" required
+              [ngClass]="{ 'is-invalid': isInvalid('email') }" />
+            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('email')">
               Este campo es muy valioso, asegurate de llenarlo correctamente.
             </div>
           </div>
-          <div class="form-floating col-md-12">
-            <input type="password" class="form-control" formControlName="password" name="password" placeholder="Contraseña nueva" 
-              required [ngClass]="{'is-invalid': registerUser.get('password').invalid && (registerUser.get('password').dirty || registerUser.get('password').touched)}"/>
-            <label for="floatingInput">Contraseña nueva</label>
-            <div class="invalid-feedback text-start" *ngIf="registerUser.get('password').invalid && (registerUser.get('password').dirty || registerUser.get('password').touched)">              La privacidad es genial, ¿no lo crees?
+          <div class="col-span-2">
+            <input type="password" class="w-full" formControlName="password" placeholder="Contraseña nueva" required
+              [ngClass]="{ 'is-invalid': isInvalid('password') }" />
+            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('password')">
+              ¡Más de 8 caracteres!
             </div>
           </div>
-        
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="submit" class="btn btn-green-fb" [attr.data-bs-dismiss]="closeModal">Registrarse</button>
+
+          <div class="col-span-2 ">
+            <label class="text-sm opacity-60 me-0">Fecha de nacimiento</label>
+            <div class="relative max-w-sm m-auto">
+              
+              <input id="datepicker-autohide" datepicker datepicker-autohide type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm m-auto rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-100 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Seleccione su fecha">
+            </div>
+
           </div>
 
-        </form>
+          <div class="col-span-2 sm:col-span-1">
+            
+              <input id="default-radio-1" type="radio" value="" name="default-radio" class="size-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2 ">
+              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default radio</label>
+          </div>          
 
+          <div class="col-span-2 sm:col-span-1">       
+              <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="size-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2 ">
+              <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Checked state</label>
+          </div>
+
+          <div class="modal-footer col-span-2 flex justify-center items-center">
+            <button type="submit" class="btn-green-fb-register font-bold text-lg text-white mt-5 py-1 px-16 rounded-md"
+              [attr.data-bs-dismiss]="closeModal">
+              Registrarte
+            </button>
+          </div>
+        </form>
       </div>
-      
     </div>
   </div>
 </div>

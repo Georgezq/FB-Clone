@@ -8,7 +8,7 @@ import { AbstractControl } from "@angular/forms";
 export class FormValidators {
   
   customeEmailValidator(control: AbstractControl){
-    const pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,20}$/;
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const value = control.value
     if(!pattern.test(value) && control.touched)
       return { emailError: true };

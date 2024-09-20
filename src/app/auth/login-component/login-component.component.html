@@ -26,18 +26,18 @@
                   </label>
               </div>
               <div class="mb-3">
-                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Contraseña"
                   formControlName="password" required />
               </div>
               <div class="container-sm">
                 <label *ngIf="error" class="text-danger">*Revise sus campos correctamente</label>
               </div>
               <div class="container-sm mt-10 w-100 flex justify-center items-center flex-col ">
-                <button class="w-full font-bold text-xl bg-[#0866ff] text-white rounded-md h-12" type="submit" [disabled]="loginUser.invalid">Iniciar sesión</button>
+                <button class="w-full font-bold text-xl bg-[#0866ff] hover:bg-[#084cb1] text-white rounded-md h-12" type="submit" [disabled]="loginUser.invalid">Iniciar sesión</button>
                 <button id="forgot_paswd" type="button"
-                  class="w-full btn my-3 p-2 rounded-2 border-1 shadow-md text-[#0866ff] border-white text-primary">¿Has olvidado la
+                  class="w-full btn my-3 p-2 rounded-2 border-1 shadow-md text-[#0866ff]  border-white text-primary">¿Has olvidado la
                   contraseña?</button>
-                  <!-- <app-register-component /> -->
+                  <app-register-component />
               </div>
             </form>
 
