@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  isSearchClicked = false;
+
+  searchClicked(){
+    this.isSearchClicked =!this.isSearchClicked;
+  }
 
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login/login.service';
-import { FormValidators } from 'src/core/utils/FormValidators';
+import { FormValidators } from 'src/app/core/utils/FormValidators';
 
 
 @Component({
@@ -37,14 +37,16 @@ export class LoginComponentComponent  {
   }
 
   loginForm(): void {
-    if(this.loginUser.valid) {
       this.loginS.loginForm(this.loginUser.value).then(
         () => {
           this.router.navigate(['/home']);
         }).catch(() => {
           this.error = true;
         });
-    } else return null
+  }
+
+  resetPassword(){
+    this.router.navigate(['reset-password']);
   }
 
 }

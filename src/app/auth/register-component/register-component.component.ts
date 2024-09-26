@@ -12,7 +12,6 @@ export class RegisterComponentComponent {
   registerUser: FormGroup | null ;
   closeModal: string = '';
   error_tooltip: string = '';
-  focusedField: string | null = null;
 
   constructor(private fb: FormBuilder, private userService: LoginServiceService) { 
     this.inicializarForm();
@@ -31,8 +30,6 @@ export class RegisterComponentComponent {
     const control = this.registerUser.get(field);
     return control!.invalid && (control!.dirty || control!.touched);
   }
-
-
 
   registerWithEmailAndPassword(){
     this.closeModal = 'modal';

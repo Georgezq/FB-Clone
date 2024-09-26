@@ -1,0 +1,38 @@
+<div class="form-container bg-main-white h-svh">
+                 
+    <section class="card p-3 rounded-md shadow-lg w-[540px] mx-auto px-12 bg-white">
+
+        <app-error-form 
+        [error]="error"
+        [headerError]="'Rellena al menos un campo'"
+        [errorMessage]="'Rellena al menos un campo para buscar tu cuenta'"
+        />
+
+        <div class="header ">
+            <span class="text-lg text-semi-dark font-bold">
+                Recuperar tu cuenta
+            </span>
+        </div>
+        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+
+        <p class="text-start">Introduce tu correo electrónico y te enviaremos un link para restablecer tu contraseña.</p>
+
+      <form [formGroup]="loginUser" (submit)="resetForm()">
+        <div class="my-4">
+          <input type="text" class="form-control"  id="floatingInput" name="email"
+            placeholder="Correo electrónico" formControlName="email" required />         
+        </div>   
+
+        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+
+        <div class="container-buttons flex flex-row ms-0 gap-5  w-100 h-10">
+            <button class="bg-bg-cancel rounded-md px-5 py-1 font-bold" [routerLink]="'/'">Cancelar</button>
+            <button type="submit" class="bg-main-blue rounded-md font-bold text-white px-5 py-1">Buscar</button>
+        </div>
+
+      </form>
+
+      
+    </section>
+   
+  </div>

@@ -24,6 +24,8 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getStorage, provideStorage  } from '@angular/fire/storage';
 import { environment } from 'src/environments/enviroments';
 import { MainPublicacionesComponent } from './components/publicaciones/main-publicaciones/main-publicaciones.component';
+import { ForgotPasswdComponent } from './auth/forgot-passwd/forgot-passwd.component';
+import { ErrorFormComponent } from './core/components/error-form/error-form.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MainPublicacionesComponent } from './components/publicaciones/main-publ
     HomeComponent,
     HistoriasComponent,
     MainPublicacionesComponent,
+    ForgotPasswdComponent,
+    ErrorFormComponent,
   ],
   imports: [
     BrowserModule,
