@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, sendPasswordResetEmail } from '@angular/fire/auth';
-import { addDoc, collection, Firestore, getFirestore } from '@angular/fire/firestore';
-
-import { Observable } from 'rxjs';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, sendPasswordResetEmail, updateProfile } from '@angular/fire/auth';
+import { addDoc, collection, doc, docData, Firestore, getDoc, getFirestore, updateDoc, where, query, collectionData  } from '@angular/fire/firestore';
+import { lastValueFrom, map, Observable } from 'rxjs';
 
 import { Users } from 'src/app/models/users/users';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginServiceService {
+export class LoginService {
 
   private auth: Auth;
   private firestore: Firestore;
@@ -26,7 +25,7 @@ export class LoginServiceService {
       async () => {
         if(user != null) {
           await addDoc(collection(this.firestore, 'users'), {
-            id_user: user.id_user,
+            id_user: this.auth.currentUser.uid,
             nombre: user.nombre,
             apellido: user.apellido,
             email: user.email,
@@ -50,13 +49,33 @@ export class LoginServiceService {
         }
       
       }
-    );
+    ).catch((error) => {
+      throw new Error(error.message);
+    });
   }
 
   //Enviar correo para reestablecer contraseña
 
   async sendEmailToResetPassword(user: Users){
     return sendPasswordResetEmail(this.auth, user.email);  
+  }
+
+  async updateProfileFireStore(id: string, user: Partial<Users>){
+    const collectionRef = collection(this.firestore, 'users');
+    const q = query(collectionRef, where('id_user', '==', id));
+    const docData = await lastValueFrom(collectionData(q, { idField: 'id'}).pipe(
+        map(informacion => {
+          return informacion[0]
+        } 
+      )))
+        console.log(docData);
+    const documentRef = doc(this.firestore, `users/${docData.id}`)
+    return await updateDoc(documentRef, {...user})
+  
+  }
+
+  async updateProfileUser(user: Users){
+    return updateProfile(this.auth.currentUser, {photoURL: user.foto })
   }
   
   

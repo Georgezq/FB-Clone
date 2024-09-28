@@ -2,6 +2,7 @@
     border-radius: 12px;
     background-color: #ffff;
     padding: 20px;
+    margin-top: 20px;
 }
 
 .publication{
@@ -16,3 +17,20 @@
     background-color: var(--content-bg-hover);
     cursor: pointer;
 }
+
+li{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+li:hover{
+    background-color: var(--content-bg);
+    border-radius: 8px;
+}
+

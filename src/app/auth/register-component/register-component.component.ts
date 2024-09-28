@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginServiceService } from 'src/app/services/login/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-register-component',
@@ -13,7 +13,7 @@ export class RegisterComponentComponent {
   closeModal: string = '';
   error_tooltip: string = '';
 
-  constructor(private fb: FormBuilder, private userService: LoginServiceService) { 
+  constructor(private fb: FormBuilder, private userService: LoginService) { 
     this.inicializarForm();
    }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormValidators } from 'src/app/core/utils/FormValidators';
-import { LoginServiceService } from 'src/app/services/login/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-forgot-passwd',
@@ -13,7 +13,7 @@ export class ForgotPasswdComponent {
   error: boolean = false;
   loginUser: FormGroup | null ;
 
-  constructor(private fb: FormBuilder, private formValid: FormValidators, private loginService: LoginServiceService) { 
+  constructor(private fb: FormBuilder, private formValid: FormValidators, private loginService: LoginService) { 
 
    this.inicializarForm();
   }

@@ -1,51 +1,46 @@
-nav ul {
+nav {
   margin: 0;
-  padding: 8px 15px;
+  padding: 0 20px;
   list-style: none;
   display: flex;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
-nav ul li {
+.grid {
   padding: 3px;
 }
 
-nav ul li a {
-  display: inline-block;
-  text-decoration: none;
-}
-nav ul li #fb {
-  background: #0b84ed;
-  color: #fff;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-}
 
-nav ul li #search_btn {
+#search_btn {
   border: none;
   outline: none;
   background: rgba(0, 0, 0, 0.068);
-  
-  color: #888;
-  width: calc(100% * 1.1);
+  width: calc(100% * .5);
   height: 40px;
   font-size: 1rem;
   border-radius: 16px;
   cursor: text;
 }
 
-nav ul li #search_btn::placeholder {
-  text-align: center;
-}
-
-nav ul li #search_ic {
+ #search_ic {
   position: absolute;
   top: 20px;
-  left: 75px;
+  left: 80px;
+}
+
+.header-menu-item a{
+  min-width: 100px;
+  max-width: 125px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.header-menu-item a:hover {
+  background-color: var(--content-bg);
+  color: #333;
 }
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-main-publicaciones',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-publicaciones.component.css']
 })
 export class MainPublicacionesComponent {
+
+  @Input() userName: string = '';
+  @Input() userPhoto: string = '';
+  // @Input() publications: any[] = [];
 
 }
