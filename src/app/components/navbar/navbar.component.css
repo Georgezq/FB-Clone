@@ -27,7 +27,7 @@ nav {
   left: 80px;
 }
 
-.header-menu-item a{
+#icons a {
   min-width: 100px;
   max-width: 125px;
   min-height: 50px;
@@ -38,7 +38,13 @@ nav {
   cursor: pointer;
 }
 
-.header-menu-item a:hover {
+#icons #profile a {
+  background-color: var(--content-bg-icons);
+  min-width: 50px;
+  border-radius: 50%;
+}
+
+#icons a:hover {
   background-color: var(--content-bg);
   color: #333;
 }

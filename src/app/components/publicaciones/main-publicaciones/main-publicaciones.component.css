@@ -1,14 +1,14 @@
 .publicacion-user{
     border-radius: 12px;
     background-color: #ffff;
-    padding: 20px;
+    padding: 10px;
     margin-top: 20px;
 }
 
 .publication{
     width: 100%;
     padding: 10px;
-    background-color: var(--content-bg);
+    background-color: var(--comment-bg);
     border: none;
     color: #8b8b8b;
 }

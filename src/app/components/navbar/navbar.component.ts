@@ -38,12 +38,19 @@ export class NavbarComponent {
   isSearchClicked: boolean = false;
   userId: string = '';
   user: Users
-  tooltipText = [
+  tooltipTextMenu = [
     { text: 'Inicio', icon: 'assets/icons/nav-icons/home.svg', route: 'home'},
     { text: 'Videos', icon: 'assets/icons/nav-icons/video.svg', route: 'videos'},
     { text: 'Marketplace', icon: 'assets/icons/nav-icons/marketplace.svg', route: 'marketplace'},
     { text: 'Grupos', icon: 'assets/icons/nav-icons/groups.svg', route: 'grupos'},
     { text: 'VideoJuegos', icon: 'assets/icons/nav-icons/games.svg', route: 'videoJuegos'},
+  ]
+
+  tooltipOptions = [
+    { texto: 'Menú', icon: 'assets/icons/nav-icons/menu.svg'},
+    { texto: 'Messenger', icon: 'assets/icons/nav-icons/messenger.svg'},
+    { texto: 'Notificaciones', icon: 'assets/icons/nav-icons/notification.svg'},
+    
   ]
 
   constructor(private elementRef: ElementRef, private storageService: StorageService, private loginService: LoginService){

@@ -27,6 +27,7 @@ import { environment } from 'src/environments/enviroments';
 import { MainPublicacionesComponent } from './components/publicaciones/main-publicaciones/main-publicaciones.component';
 import { ForgotPasswdComponent } from './auth/forgot-passwd/forgot-passwd.component';
 import { ErrorFormComponent } from './core/components/error-form/error-form.component';
+import { TooltipMessageComponent } from './core/components/tooltip-message/tooltip-message.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ErrorFormComponent } from './core/components/error-form/error-form.comp
     MainPublicacionesComponent,
     ForgotPasswdComponent,
     ErrorFormComponent,
+    TooltipMessageComponent,
     
   ],
   imports: [
