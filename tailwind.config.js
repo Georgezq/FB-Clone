@@ -20,6 +20,7 @@ module.exports = {
         //TEXTOS
         'txt-dark': '#333',
         'semi-dark': '#1c1e21',
+        'gray-100': '#606770',
         
         //ICONS
         'primary-icon': '#050505'

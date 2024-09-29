@@ -29,40 +29,29 @@
         </button>
       </div>
       <!-- Modal body -->
-      <div class="p-4 md:p-5 space-y-4">
-        <form class="grid gap-4 grid-cols-4  needs-validation" [formGroup]="registerUser"
-          (submit)="registerWithEmailAndPassword()">
-          <div class="col-span-4 sm:col-span-2">
-            <input type="text" formControlName="nombre" placeholder="Nombre" required
-              [ngClass]="{ 'is-invalid': isInvalid('nombre') }" />
-            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('nombre')">
-              Queremos saber como te llamas!
+      <div class="p-4 md:p-5 space-y-4 ">
+        <form class="flex flex-col needs-validation" [formGroup]="registerUser" (submit)="registerWithEmailAndPassword()">
+          <div class="flex flex-row w-100 gap-10 flex-wrap my-2">
+            <div>
+              <input type="text" formControlName="nombre" placeholder="Nombre" required
+                [ngClass]="{ 'is-invalid': isInvalid('nombre') }" />
+              <div class="invalid-feedback text-start text-red-800 text-sm py-1" *ngIf="isInvalid('nombre')">
+                Queremos saber como te llamas!
+              </div>
             </div>
-          </div>
-          <div class="col-span-4 sm:col-span-2">
-            <input type="text" formControlName="apellido" placeholder="Apellidos" required
-              [ngClass]="{ 'is-invalid': isInvalid('apellido') }" />
-            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('apellido')">
-              Nos encantaria saber tu apellido.
-            </div>
-          </div>
-          <div class="col-span-4">
-            <input type="email" class="w-full" formControlName="email" placeholder="Correo electronico" required
-              [ngClass]="{ 'is-invalid': isInvalid('email') }" />
-            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('email')">
-              Este campo es muy valioso, asegurate de llenarlo correctamente.
-            </div>
-          </div>
-          <div class="col-span-4">
-            <input type="password" class="w-full" formControlName="password" placeholder="Contraseña nueva" required
-              [ngClass]="{ 'is-invalid': isInvalid('password') }" />
-            <div class="invalid-feedback text-start text-red-800 text-sm py-3" *ngIf="isInvalid('password')">
-              ¡Más de 8 caracteres!
-            </div>
+            <div>
+                <input type="text" formControlName="apellido" placeholder="Apellidos" required
+                  [ngClass]="{ 'is-invalid': isInvalid('apellido') }" />
+                <div class="invalid-feedback text-start text-red-800 text-sm py-1" *ngIf="isInvalid('apellido')">
+                  Nos encantaria saber tu apellido.
+                </div>
+              </div>
           </div>
 
-          <div class="col-span-4 text-start">
-            <label class="text-sm opacity-60 me-0">Fecha de nacimiento</label>
+          <div class="my-2">
+            <div class="text-start">
+              <label class="text-sm opacity-60">Fecha de nacimiento</label>
+            </div>
             <div class="relative max-w-sm m-auto">
               <input id="datepicker-autohide" datepicker datepicker-autohide type="text"
                 class="bg-gray-50 border border-gray-300 text-gray-900 w-full text-sm m-auto rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-100 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -71,31 +60,53 @@
 
           </div>
 
-        
-           <div class="col-span-4 text-start">
+          <div class="text-start my-2">
             <label class="text-sm opacity-60 me-0">Género</label>
-           </div>
 
+            <div class="flex flex-row justify-between my-1">
 
-            <div class="col-span-1 rounded-sm border m-auto">
-              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mujer</label>
-            <input id="default-radio-1" type="radio" value="" name="default-radio"
-              class="size-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2 ">
+              <ng-container *ngFor="let item of generoOptions; let i = index">
+
+                <div class="mx-2 rounded-sm border border-[#9b9b9b66] px-4 py-2 flex gap-5 justify-between">
+                  <label [for]="'genero' + i"
+                    class=" text-sm font-medium text-gray-900 dark:text-gray-300"> {{item.tipo}} </label>
+                  <input [id]="'genero' + i" type="radio" [value]="item.value" formControlName="genero" 
+                  class="size-4 ">
+                </div>
+
+              </ng-container>
+          
             </div>
 
+            <div class="w-100 flex flex-col" *ngIf="isPersonalizado()">
+              <select formControlName="pronombre" id="pronombres" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-4 mb-2">
+                <option value="" disabled selected>Selecciona tu pronombre</option>
+                <ng-container *ngFor="let item of generoPersonalizado">
+                  <option  [value]="item.value"> {{item.tipo}} </option>
+                </ng-container>
+              </select>
+              <label class="text-sm text-gray-100 mb-3">Todos pueden ver tu pronombre.</label>
+              <input type="text" formControlName="generoPersonalizado" placeholder="Género (opcional)" required
+              />
+            </div>
+         
 
-             <div class="col-span-1">
-              <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hombre</label>
-              <input checked id="default-radio-2" type="radio" value="" name="default-radio"
-                class="size-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2 ">
-             </div>
+          </div>
 
-              <div class="col-span-1">
-                <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Personalizado</label>
-              <input checked id="default-radio-2" type="radio" value="" name="default-radio"
-              class="size-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500focus:ring-2 ">
-              </div>
-
+          <div class="my-2">
+            <input type="email" class="w-full" formControlName="email" placeholder="Correo electronico" required
+              [ngClass]="{ 'is-invalid': isInvalid('email') }" />
+            <div class="invalid-feedback text-start text-red-800 text-sm py-1" *ngIf="isInvalid('email')">
+              Este campo es muy valioso, asegurate de llenarlo correctamente.
+            </div>
+          </div>
+          <div class="my-2">
+            <input type="password" class="w-full" formControlName="password" placeholder="Contraseña nueva" required
+              [ngClass]="{ 'is-invalid': isInvalid('password') }" />
+            <div class="invalid-feedback text-start text-red-800 text-sm py-1" *ngIf="isInvalid('password')">
+              ¡Más de 8 caracteres!
+            </div>
+          </div>
 
           <div class="modal-footer col-span-2 flex justify-center items-center">
             <button type="submit" class="btn-green-fb-register font-bold text-lg text-white mt-5 py-1 px-16 rounded-md"

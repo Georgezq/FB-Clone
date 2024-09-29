@@ -12,9 +12,22 @@ export class RegisterComponentComponent {
   registerUser: FormGroup | null ;
   closeModal: string = '';
   error_tooltip: string = '';
+  personalizado: boolean = false;
+  generoOptions = [
+    { tipo: 'Mujer', value: 'M' },
+    { tipo: 'Hombre', value: 'H' },
+    { tipo: 'Personalizado', value: 'P' },
+  ]
+
+  generoPersonalizado = [
+    { tipo: 'Femenino: "Felicítala por su cumpleaños"', value: 'ella' },
+    { tipo: 'Masculino: "Felicítalo por su cumpleaños"', value: 'el' },
+    { tipo: 'Neutro: "Felicítale por su cumpleaños"', value: 'elle' },
+  ]
 
   constructor(private fb: FormBuilder, private userService: LoginService) { 
     this.inicializarForm();
+    this.isPersonalizado()
    }
 
   private inicializarForm(){
@@ -22,9 +35,34 @@ export class RegisterComponentComponent {
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       apellido: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      genero: ['', [Validators.required]],
+      pronombre: [''],
+      generoSeleccion: [''],
+      generoPersonalizado: [''],
+    });
+
+    // Escuchar cambios en generoSeleccion
+    this.registerUser.get('generoSeleccion').valueChanges.subscribe(value => {
+      if (value === 'P') {
+        this.registerUser.get('pronombre').setValidators([Validators.required]);
+        this.registerUser.get('generoPersonalizado').enable();
+      } else {
+        this.registerUser.get('pronombre').clearValidators();
+        this.registerUser.get('generoPersonalizado').disable();
+      }
+      this.registerUser.get('pronombre').updateValueAndValidity();
+      this.registerUser.get('generoPersonalizado').updateValueAndValidity();
     });
   }
+
+  isPersonalizado(): boolean {
+    const valor = this.registerUser.get('genero').value;
+    if(valor === 'P') return true;
+    return false;
+  }
+
+
 
   isInvalid(field: string): boolean {
     const control = this.registerUser.get(field);
@@ -33,6 +71,7 @@ export class RegisterComponentComponent {
 
   registerWithEmailAndPassword(){
     this.closeModal = 'modal';
+ 
     if(this.registerUser.valid){
       this.userService.registerForm(this.registerUser.value)
       // limpiar formulario
