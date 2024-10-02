@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/services/login/login.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-register-component',
@@ -25,7 +25,7 @@ export class RegisterComponentComponent {
     { tipo: 'Neutro: "Felicítale por su cumpleaños"', value: 'elle' },
   ]
 
-  constructor(private fb: FormBuilder, private userService: LoginService) { 
+  constructor(private fb: FormBuilder, private userService: AuthService) { 
     this.inicializarForm();
     this.isPersonalizado()
    }
@@ -49,7 +49,9 @@ export class RegisterComponentComponent {
         this.registerUser.get('generoPersonalizado').enable();
       } else {
         this.registerUser.get('pronombre').clearValidators();
+        this.registerUser.get('pronombre').reset();
         this.registerUser.get('generoPersonalizado').disable();
+        this.registerUser.get('pronombre').reset();
       }
       this.registerUser.get('pronombre').updateValueAndValidity();
       this.registerUser.get('generoPersonalizado').updateValueAndValidity();
@@ -61,8 +63,6 @@ export class RegisterComponentComponent {
     if(valor === 'P') return true;
     return false;
   }
-
-
 
   isInvalid(field: string): boolean {
     const control = this.registerUser.get(field);

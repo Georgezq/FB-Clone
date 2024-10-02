@@ -31,3 +31,7 @@ input::content{
 input:active{
   border: 1px solid rgb(0, 204, 255);
 }
+
+input[type="radio"]{
+  color: #dddfe2;
+}

@@ -1,5 +1,5 @@
 <nav>
-  <div class="grid grid-cols-3 grid-flow-col gap-10 w-full p-4">
+  <div class="grid grid-cols-3 grid-flow-col gap-10 w-full p-1">
 
     <div class="search-item flex flex-row items-center content-center">
       <a class="me-2" [href]="'home'" id="fb">
@@ -16,7 +16,7 @@
       <div class="grid grid-flow-col auto-cols-max justify-center">
 
         <ng-container *ngFor="let itemMenu of tooltipTextMenu; let i = index">
-          <a [href]="itemMenu.route" [attr.data-tooltip-target]="i" data-tooltip-placement="bottom" type="button">
+          <a id="tool" [href]="itemMenu.route" [attr.data-tooltip-target]="i" data-tooltip-placement="bottom" type="button">
             <img [src]="itemMenu.icon" class="size-7" [alt]="itemMenu.text">
             <app-tooltip-message 
             [id]="i"
@@ -32,7 +32,7 @@
     <div id="icons" class="profile-menu-item ms-auto">
       <div id="profile" class="grid grid-flow-col auto-cols-max justify-center gap-x-2 ">
         <ng-container *ngFor="let itemLeft of tooltipOptions; let tool = index">
-          <a [attr.data-tooltip-target]="itemLeft.texto" data-tooltip-placement="bottom" type="button">
+          <a id="tool" [attr.data-tooltip-target]="itemLeft.texto" data-tooltip-placement="bottom" type="button">
 
             <img [src]="itemLeft.icon" class="size-7" [alt]="itemLeft.texto">
 
@@ -44,11 +44,36 @@
           </a>
         </ng-container>
 
-        <div class="user-info">
+        <div class="user-info ">
           
-          <a>
-            <img src="assets/test_images/profile1.jpeg" class="rounded-full size-12 object-cover" alt="">
+          <a class="cursor-pointer" (click)="menuClicked($event)">
+            <img [src]="userPhoto" class="rounded-full size-12 object-cover" alt="" >
           </a>
+
+          <div class="profile-settings absolute w-[350px] right-5 bg-white mt-2 rounded-sm shadow-md" [@openClose]="navbarMenuActive ? 'open' : 'closed' ">
+            
+              <div class="w-11/12 cursor-pointer mx-auto my-2 rounded-lg shadow-xl p-2 bg-white/30">
+                <a id="menu-profile" class="flex w-100 items-center justify-start gap-5">
+                  <img [src]="userPhoto" class="rounded-full size-12 object-cover" alt="">
+                  <span class="w-100 text-primary-text font-semibold text-lg">George Mendoza</span>
+                </a>
+              </div>
+
+              <div class="py-2" >
+                <ng-container class="w-3/4" *ngFor="let profileOpt of profileOptions" >
+                  <div class="p-2 my-1 w-11/12 mx-auto">
+                    <a href="#" class="flex w-100 items-center justify-start gap-5 py-2">
+                      <img src="{{ profileOpt.icon }}" class="size-7" [alt]="profileOpt.texto">
+                      <span class="w-100 text-primary-text font-medium text-md break-words">{{ profileOpt.texto }}</span>
+                    </a>
+                  </div>
+                </ng-container>
+                
+              </div>
+
+
+          
+          </div>
         </div>
 
       </div>

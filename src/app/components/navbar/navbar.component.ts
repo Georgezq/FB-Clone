@@ -1,7 +1,7 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { Users } from 'src/app/models/users/users';
-import { LoginService } from 'src/app/services/login/login.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -30,14 +30,23 @@ import { StorageService } from 'src/app/services/storage/storage.service';
       state('wiPd', style({
         padding: '0 0 0 20px',
       }))
-    ])
+    ]),
 
   ]})
 export class NavbarComponent {
 
+  // Inputs
+
+  @Input() name: string = '';
+  @Input() lastName: string = '';
+  @Input() userPhoto: string = '';
+  @Input() isLoggedIn: boolean = false;
+
   isSearchClicked: boolean = false;
   userId: string = '';
-  user: Users
+  user: Users;
+  navbarMenuActive: boolean = false;
+
   tooltipTextMenu = [
     { text: 'Inicio', icon: 'assets/icons/nav-icons/home.svg', route: 'home'},
     { text: 'Videos', icon: 'assets/icons/nav-icons/video.svg', route: 'videos'},
@@ -50,10 +59,17 @@ export class NavbarComponent {
     { texto: 'Menú', icon: 'assets/icons/nav-icons/menu.svg'},
     { texto: 'Messenger', icon: 'assets/icons/nav-icons/messenger.svg'},
     { texto: 'Notificaciones', icon: 'assets/icons/nav-icons/notification.svg'},
-    
   ]
 
-  constructor(private elementRef: ElementRef, private storageService: StorageService, private loginService: LoginService){
+  profileOptions = [
+    { texto: 'Configuración y privacidad', icon: 'assets/icons/nav-icons/profile-icons/settings.svg', },
+    { texto: 'Ayuda y soporte técnico', icon: 'assets/icons/nav-icons/profile-icons/help.svg', },
+    { texto: 'Pantalla y accesibilidad', icon: 'assets/icons/nav-icons/profile-icons/accesibilidad.svg', },
+    { texto: 'Enviar comentarios', icon: 'assets/icons/nav-icons/profile-icons/comentarios.svg', },
+    { texto: 'Cerrar sesión', icon: 'assets/icons/nav-icons/profile-icons/leave.svg', },
+  ]
+
+  constructor(private elementRef: ElementRef, private storageService: StorageService, private AuthService: AuthService){
     const currentUser = JSON.parse(localStorage.getItem('currenUser')!);
     this.userId = currentUser.uid;
   }
@@ -63,10 +79,16 @@ export class NavbarComponent {
     this.isSearchClicked =!this.isSearchClicked;
   }
 
+  menuClicked(event: Event): void {
+    event.stopPropagation();
+    this.navbarMenuActive =!this.navbarMenuActive;
+  }
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event): void {
     if(!this.elementRef.nativeElement.contains(event.target)){
       this.isSearchClicked = false;
+      this.navbarMenuActive = false;
     }
   }
 
@@ -85,7 +107,7 @@ export class NavbarComponent {
       password: 'georgio123',
       foto: this.userId + '.jpg',
     }
-    this.loginService.updateProfileFireStore(this.userId, update)
+    this.AuthService.updateProfileFireStore(this.userId, update)
   }
 
 }

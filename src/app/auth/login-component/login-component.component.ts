@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login/login.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormValidators } from 'src/app/core/utils/FormValidators';
 
 
@@ -15,11 +15,13 @@ export class LoginComponentComponent  {
   error: boolean = false;
   loginUser: FormGroup | null ;
 
-  constructor(private loginS: LoginService, private router: Router, private fb: FormBuilder,
+  constructor(private loginS: AuthService, private router: Router, private fb: FormBuilder,
     private formValid: FormValidators
   ){
     this.inicializarForm();
   }
+
+
 
   private inicializarForm(){
     this.loginUser = this.fb.group({

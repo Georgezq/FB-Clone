@@ -9,6 +9,7 @@ export class MainPublicacionesComponent {
 
   @Input() userName: string = '';
   @Input() userPhoto: string = '';
+  @Input() loading: boolean = false;
   // @Input() publications: any[] = [];
 
 }

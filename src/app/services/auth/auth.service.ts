@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, sendPasswordResetEmail, updateProfile } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, sendPasswordResetEmail, updateProfile, onAuthStateChanged } from '@angular/fire/auth';
 import { addDoc, collection, doc, docData, Firestore, getDoc, getFirestore, updateDoc, where, query, collectionData  } from '@angular/fire/firestore';
 import { lastValueFrom, map, Observable } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Users } from 'src/app/models/users/users';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   private auth: Auth;
   private firestore: Firestore;
@@ -51,6 +51,29 @@ export class LoginService {
       }
     ).catch((error) => {
       throw new Error(error.message);
+    });
+  }
+
+  getUserLogged(): Observable<any> {
+    return new Observable(observer => {
+      const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          const collectionRef = collection(this.firestore, 'users');
+          const q = query(collectionRef, where('id_user', '==', user.uid));
+          
+          collectionData(q, { idField: 'id' }).pipe(
+            map(informacion => informacion[0])
+          ).subscribe(
+            result => observer.next(result),
+            error => observer.error(error)
+          );
+        } else {
+          observer.next(null);
+        }
+      });
+  
+      // Retorna una función de limpieza para desuscribirse cuando sea necesario
+      return () => unsubscribe();
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormValidators } from 'src/app/core/utils/FormValidators';
-import { LoginService } from 'src/app/services/login/login.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-forgot-passwd',
@@ -13,7 +13,7 @@ export class ForgotPasswdComponent {
   error: boolean = false;
   loginUser: FormGroup | null ;
 
-  constructor(private fb: FormBuilder, private formValid: FormValidators, private loginService: LoginService) { 
+  constructor(private fb: FormBuilder, private formValid: FormValidators, private AuthService: AuthService) { 
 
    this.inicializarForm();
   }
@@ -25,7 +25,7 @@ export class ForgotPasswdComponent {
   }
 
   resetForm(){
-    this.loginService.sendEmailToResetPassword(this.loginUser.value).then(() => {
+    this.AuthService.sendEmailToResetPassword(this.loginUser.value).then(() => {
       
     }).catch(() => {
       this.error = true
