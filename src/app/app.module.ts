@@ -28,6 +28,7 @@ import { MainPublicacionesComponent } from './components/publicaciones/main-publ
 import { ForgotPasswdComponent } from './auth/forgot-passwd/forgot-passwd.component';
 import { ErrorFormComponent } from './core/components/error-form/error-form.component';
 import { TooltipMessageComponent } from './core/components/tooltip-message/tooltip-message.component';
+import { UsersListComponent } from './components/publicaciones/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TooltipMessageComponent } from './core/components/tooltip-message/toolt
     ForgotPasswdComponent,
     ErrorFormComponent,
     TooltipMessageComponent,
+    UsersListComponent,
     
   ],
   imports: [

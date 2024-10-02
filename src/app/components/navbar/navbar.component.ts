@@ -32,6 +32,20 @@ import { StorageService } from 'src/app/services/storage/storage.service';
       }))
     ]),
 
+    trigger('openMenu', [
+      state('open', style({
+        height: '*',
+        opacity: 1,
+      })),
+      state('closed', style({
+        height: '0px',
+        opacity: 0,
+      })),
+      transition('open <=> closed', [
+        animate('0.3s ease')
+      ])
+    ]),
+
   ]})
 export class NavbarComponent {
 
@@ -40,6 +54,7 @@ export class NavbarComponent {
   @Input() name: string = '';
   @Input() lastName: string = '';
   @Input() userPhoto: string = '';
+  @Input() loading: boolean = false;
   @Input() isLoggedIn: boolean = false;
 
   isSearchClicked: boolean = false;
@@ -56,9 +71,9 @@ export class NavbarComponent {
   ]
 
   tooltipOptions = [
-    { texto: 'Menú', icon: 'assets/icons/nav-icons/menu.svg'},
-    { texto: 'Messenger', icon: 'assets/icons/nav-icons/messenger.svg'},
-    { texto: 'Notificaciones', icon: 'assets/icons/nav-icons/notification.svg'},
+    { texto: 'Menú', icon: 'assets/icons/nav-icons/menu.svg', menuOption: false},
+    { texto: 'Messenger', icon: 'assets/icons/nav-icons/messenger.svg', messengerOption: false},
+    { texto: 'Notificaciones', icon: 'assets/icons/nav-icons/notification.svg', notificacionOption: false},
   ]
 
   profileOptions = [
@@ -81,7 +96,7 @@ export class NavbarComponent {
 
   menuClicked(event: Event): void {
     event.stopPropagation();
-    this.navbarMenuActive =!this.navbarMenuActive;
+    if(this.loading === true) this.navbarMenuActive =!this.navbarMenuActive;
   }
 
   @HostListener('document:click', ['$event'])

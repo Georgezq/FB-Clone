@@ -1,16 +1,23 @@
-<app-navbar [userPhoto]="foto"></app-navbar>
-<div class="flex flex-row " id="main">
-    <div class="basis-1/4">
-        <!-- <app-sidebar /> -->
-    </div>
-    <div class="basis-1/2">
-        <!-- <app-historias /> -->
-        <app-main-publicaciones
-        [userName]="nombre"
-        [userPhoto]="foto"
-        [loading]="loading"
-        />
-    </div>
-    <div class="basis-1/4">
-    </div>
+<app-navbar
+  [name]="nombre"
+  [lastName]="apellidos"
+  [userPhoto]="foto"
+  [loading]="loading"
+/>
+<div class="flex flex-row" id="main">
+  <div class="basis-1/4">
+    <!-- <app-sidebar /> -->
+  </div>
+  <div class="basis-1/2">
+    <!-- <app-historias /> -->
+     
+    <app-main-publicaciones
+      [userName]="nombre"
+      [userPhoto]="foto"
+      [loading]="loading"
+    />
+  </div>
+  <div class="basis-1/4">
+    <app-users-list [otherUsers]="otherUsers" [loading]="loading" />
+  </div>
 </div>

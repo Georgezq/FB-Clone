@@ -13,6 +13,7 @@ module.exports = {
         'bg-error': '#ffebe8',
         'bg-cancel': '#e4e6eb',
         'bg-icons': '#e4e6eb',
+        'bg-text-hover': '#e6e6e6',
 
         //BORDERS
         'br-error': '#dd3c10',

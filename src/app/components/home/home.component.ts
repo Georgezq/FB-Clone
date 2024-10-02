@@ -12,17 +12,36 @@ export class HomeComponent implements OnInit {
   userLogged: Users;
   nombre: string = '';
   foto: string = '';
+  apellidos: string = '';
 
   loading: boolean = false;
+
+  otherUsers: any;
 
   constructor(private authService: AuthService){}
 
   async ngOnInit() {
+    this.obtenerDatosUsuarioLogueado();
+    this.obtenerUsuarios();
+  }
+
+  private obtenerDatosUsuarioLogueado(){
     this.authService.getUserLogged().subscribe((user: any) => {
       this.nombre = user.nombre;
       this.foto = user.foto;
+      this.apellidos = user.apellido;
+      
+      this.loading = true;
+    })
+  }
+
+  private obtenerUsuarios(){
+    this.authService.getOtherUsers().subscribe((users:any) => {
+      this.otherUsers = users;
+
 
       this.loading = true;
     })
   }
+  
 }

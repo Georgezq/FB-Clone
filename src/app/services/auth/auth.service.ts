@@ -77,6 +77,26 @@ export class AuthService {
     });
   }
 
+  // Obtener los usuarios que no son el usuario logueado
+  getOtherUsers(){
+    return new Observable(observer => {
+      const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          const collectionRef = collection(this.firestore, 'users');
+          const q = query(collectionRef, where('id_user', '!=', user.uid));
+          
+          collectionData(q, { idField: 'id' }).subscribe(
+            result => observer.next(result),
+            error => observer.error(error)
+          );
+        } else {
+          observer.next(null);
+        }
+      });
+    })
+    
+  }
+
   //Enviar correo para reestablecer contraseña
 
   async sendEmailToResetPassword(user: Users){
@@ -93,7 +113,7 @@ export class AuthService {
       )))
         console.log(docData);
     const documentRef = doc(this.firestore, `users/${docData.id}`)
-    return await updateDoc(documentRef, {...user})
+    return await updateDoc(documentRef, {...user});
   
   }
 

@@ -4,7 +4,6 @@ nav {
   list-style: none;
   display: flex;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  font-size: slap();
 }
 
 #search_btn {
@@ -21,7 +20,7 @@ nav {
  #search_ic {
   position: absolute;
   top: 20px;
-  left: 80px;
+  left: 90px;
 }
 
 #icons #tool {
