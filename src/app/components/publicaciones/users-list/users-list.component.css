@@ -1,0 +1,7 @@
+#bubble .item-close{
+    display: none;
+}
+
+#bubble:hover .item-close{
+    display: block;
+}

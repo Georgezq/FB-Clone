@@ -93,8 +93,31 @@ export class AuthService {
           observer.next(null);
         }
       });
+        // Retorna una función de limpieza para desuscribirse cuando sea necesario
+        return () => unsubscribe();
     })
-    
+  }
+
+  // Obtener los usuarios seleccionados por el usuario logueado para crear una burbuja de chat
+
+  getUsersSelectedById(uid: any){
+    return new Observable(observer => {
+      const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+        if (user) {
+          const collectionRef = collection(this.firestore, 'users');
+          const q = query(collectionRef, where('id_user', '==', uid));
+          
+          collectionData(q, { idField: 'id' }).subscribe(
+            result => observer.next(result),
+            error => observer.error(error)
+          );
+        } else {
+          observer.next(null);
+        }
+      });
+        // Retorna una función de limpieza para desuscribirse cuando sea necesario
+        return () => unsubscribe();
+    })
   }
 
   //Enviar correo para reestablecer contraseña
