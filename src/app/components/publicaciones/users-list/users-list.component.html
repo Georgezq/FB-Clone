@@ -4,7 +4,7 @@
         <span class="font-medium my-2">Personas</span>
         <ng-container *ngFor="let item of otherUsers; let i = index">
             <a class="user-item w-100 p-2 flex flex-row items-center gap-3 cursor-pointer hover:bg-bg-text-hover"
-                (click)="addNewBubbleChat(item.id_user)">
+                (click)="openChat(item.id_user)">
                 <img [src]="item.foto" class="size-8 rounded-full object-cover" alt="Imagen del usuario">
                 <div class="">
                     <div class="font-medium text-gray-700 dark:text-gray-200">{{ item.nombre + ' ' + item.apellido }}
@@ -31,10 +31,12 @@
 
     </div>
 
-    <div class="bubble-chat fixed right-4 bottom-20 cursor-pointer  ">
+    <!-- SECCION PARA LA BURBUJA DEL CHAT -->
+
+    <div class="bubble-chat fixed right-4 bottom-20 cursor-pointer  " [@openClose]="isNew ? 'open' : 'closed' ">
         <ng-container *ngFor="let usuario of usuariosSeleccionados; let i = index">
             <div class="my-2">
-                <a id="bubble" [attr.data-tooltip-target]="usuario.id_user" data-tooltip-placement="left" type="button">
+                <button id="bubble" (click)="openChat(usuario.id_user)" [attr.data-tooltip-target]="usuario.id_user" data-tooltip-placement="left" type="button">
                     <div class="relative">
                         <img class="size-12 rounded-full object-cover " [src]="usuario.foto">
                        <button (click)="deleteBubbleChat(usuario.id_user)" class="item-close" >
@@ -44,9 +46,37 @@
                     </button>
                     </div>
                     <app-tooltip-message [id]="usuario.id_user" [message]="usuario.nombre" />
-                </a>
+                </button>
             </div>
         </ng-container>
+    </div>
+
+    <div class="chat-window fixed right-20 bottom-0  flex flex-row gap-6 ">
+        <ng-container *ngFor="let chat of chatWithUser">
+            <div class="chat shadow-lg h-[400px] w-[325px] rounded-lg border">
+                <div class="chat-header border-b shadow h-[55px] flex flex-row items-center">
+                    <div class="relative p-2">
+                        <img class="size-10 rounded-full object-cover" [src]="chat.foto" alt="">
+                        <span class="bottom-2 left-8 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    </div>
+                    <div class="nombre-chat">
+                        <span class="text-primary-text font-semibold text-md"> {{chat.nombre + ' ' + chat.apellido}} </span>
+                    </div>
+                    <div class="opciones-chat w-100">
+                        <div class="flex flex-row items-end justify-end gap-2">
+                            <button type="button" (click)="addNewBubbleChat(chat.id_user)">
+                                <img src="assets/icons/minus.svg" class="size-5" alt="">
+                            </button>
+                            <button type="button" (click)="deleteChat(chat.id_user)">
+                                <img src="assets/icons/x_mark.svg" class="size-5" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <span>hola que tal</span>
+            </div>
+        </ng-container>
+        
     </div>
 
 </div>
