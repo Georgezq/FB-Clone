@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   loading: boolean = false;
 
-  otherUsers: any;
+  otherUsers: Users[];
 
   constructor(private authService: AuthService){}
 

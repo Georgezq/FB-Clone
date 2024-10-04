@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, sendPasswordResetEmail, updateProfile, onAuthStateChanged } from '@angular/fire/auth';
-import { addDoc, collection, doc, docData, Firestore, getDoc, getFirestore, updateDoc, where, query, collectionData  } from '@angular/fire/firestore';
-import { lastValueFrom, map, Observable } from 'rxjs';
+import { addDoc, collection, doc, docData, Firestore, getDoc, getFirestore, updateDoc, where, query, collectionData, limit  } from '@angular/fire/firestore';
+import { lastValueFrom, map, merge, Observable, take } from 'rxjs';
+import { Chat } from 'src/app/models/chat';
 
 import { Users } from 'src/app/models/users/users';
 
@@ -119,6 +120,7 @@ export class AuthService {
         return () => unsubscribe();
     })
   }
+
 
   //Enviar correo para reestablecer contraseña
 

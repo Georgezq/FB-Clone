@@ -104,7 +104,7 @@ export class HistoriasComponent implements OnInit{
   }
 
   // Método para obtener la foto del usuario en función de la id_usuario
-getUsuarioFoto(idUsuario: number): string {
+getUsuarioFoto(idUsuario: string): string {
   if (!this.user) {
     return ''; // Puedes manejar el caso en que usuarios aún no se ha cargado
   }
@@ -118,7 +118,7 @@ getUsuarioFoto(idUsuario: number): string {
   return usuario.foto;
 }
 
-getUsuarioNombre(idUsuario: number): string {
+getUsuarioNombre(idUsuario: string): string {
   if (!this.user) {
     return ''; // Puedes manejar el caso en que usuarios aún no se ha cargado
   }

@@ -1,17 +1,17 @@
 <div class="container ms-auto w-3/4">
 
     <div class="user-list w-100 flex flex-col mt-5 ms-5">
-        <span class="font-medium my-2">Personas</span>
-        <ng-container *ngFor="let item of otherUsers; let i = index">
-            <a class="user-item w-100 p-2 flex flex-row items-center gap-3 cursor-pointer hover:bg-bg-text-hover"
-                (click)="openChat(item.id_user)">
-                <img [src]="item.foto" class="size-8 rounded-full object-cover" alt="Imagen del usuario">
+        <span class="font-medium my-2">Contactos</span>
+        <ng-container *ngFor="let item of chats$ | async ; let i = index">
+            <a (click)="openChat(item)"
+                class="user-item w-100 p-2 flex flex-row items-center gap-3 cursor-pointer hover:bg-bg-text-hover">
+                <img [src]="item.chatPic" class="size-8 rounded-full object-cover" alt="Imagen del usuario">
                 <div class="">
-                    <div class="font-medium text-gray-700 dark:text-gray-200">{{ item.nombre + ' ' + item.apellido }}
+                    <div class="font-medium text-gray-700 dark:text-gray-200">{{ item.chatName }}
                     </div>
+                    
                 </div>
             </a>
-
         </ng-container>
 
         <ng-template [ngIf]="!loading">
@@ -36,14 +36,15 @@
     <div class="bubble-chat fixed right-4 bottom-20 cursor-pointer  " [@openClose]="isNew ? 'open' : 'closed' ">
         <ng-container *ngFor="let usuario of usuariosSeleccionados; let i = index">
             <div class="my-2">
-                <button id="bubble" (click)="openChat(usuario.id_user)" [attr.data-tooltip-target]="usuario.id_user" data-tooltip-placement="left" type="button">
+                <button id="bubble" [attr.data-tooltip-target]="usuario.id_user" data-tooltip-placement="left"
+                    type="button">
                     <div class="relative">
                         <img class="size-12 rounded-full object-cover " [src]="usuario.foto">
-                       <button (click)="deleteBubbleChat(usuario.id_user)" class="item-close" >
-                        <span class="top-0 left-9 bg-white size-5 rounded-full  absolute">
-                            <img src="assets/icons/x_mark.svg" class="size-5" alt="">
-                        </span>
-                    </button>
+                        <button (click)="deleteBubbleChat(usuario.id_user)" class="item-close">
+                            <span class="top-0 left-9 bg-white size-5 rounded-full  absolute">
+                                <img src="assets/icons/x_mark.svg" class="size-5" alt="">
+                            </span>
+                        </button>
                     </div>
                     <app-tooltip-message [id]="usuario.id_user" [message]="usuario.nombre" />
                 </button>
@@ -51,32 +52,76 @@
         </ng-container>
     </div>
 
-    <div class="chat-window fixed right-20 bottom-0  flex flex-row gap-6 ">
-        <ng-container *ngFor="let chat of chatWithUser">
-            <div class="chat shadow-lg h-[400px] w-[325px] rounded-lg border">
-                <div class="chat-header border-b shadow h-[55px] flex flex-row items-center">
-                    <div class="relative p-2">
-                        <img class="size-10 rounded-full object-cover" [src]="chat.foto" alt="">
-                        <span class="bottom-2 left-8 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                    </div>
-                    <div class="nombre-chat">
-                        <span class="text-primary-text font-semibold text-md"> {{chat.nombre + ' ' + chat.apellido}} </span>
+    <div class="chat-window fixed right-20 bottom-0  flex flex-row gap-6 " *ngIf="openChatControl">
+        <ng-container *ngFor="let chat of chats$ | async" >
+            <div class="chat shadow-lg h-[400px] w-[325px] rounded-lg border" *ngIf="onlyAChat === chat.id">
+                <div class="chat-header border-b shadow h-[55px] flex flex-row items-center justify-between">
+                    <div class="info-userChat flex flex-row items-center">
+                        <div class="relative p-2">
+                            <img class="size-10 rounded-full object-cover" [src]="chat.chatPic" alt="">
+                            <span
+                                class="bottom-2 left-8 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                        </div>
+                        <div class="nombre-chat">
+                            <span class="text-primary-text font-semibold text-md"> {{chat.chatName}}
+                            </span>
+                        </div>
                     </div>
                     <div class="opciones-chat w-100">
                         <div class="flex flex-row items-end justify-end gap-2">
-                            <button type="button" (click)="addNewBubbleChat(chat.id_user)">
+                            <button type="button">
+                                <img src="assets/icons/phone.svg" class="size-5" alt="">
+                            </button>
+                            <button type="button">
+                                <img src="assets/icons/video_call.svg" class="size-5" alt="">
+                            </button>
+                            <button type="button" >
                                 <img src="assets/icons/minus.svg" class="size-5" alt="">
                             </button>
-                            <button type="button" (click)="deleteChat(chat.id_user)">
+                            <button type="button" >
                                 <img src="assets/icons/x_mark.svg" class="size-5" alt="">
                             </button>
                         </div>
                     </div>
                 </div>
-                <span>hola que tal</span>
+                <div class="chat-body p-4" *ngIf="chat.lastMessage">
+                    <div class="flex flex-row items-center gap-2">
+                        <img [src]="chat.chatPic" class="size-6 object-cover rounded-full" alt="">
+                        <span class="p-2 rounded-2xl bg-gray-200"> {{chat.lastMessage}} </span>
+                    </div>
+                </div>
+
+                <div class="chat-footer absolute bottom-4 ">
+                    <div class="options flex flex-row justify-between gap-1 items-center">
+                        <div class="first-options flex flex-row gap-2">
+                            <button type="button">
+                                <img src="assets/icons/microphone.svg" class="size-5" alt="">
+                            </button>
+                            <button type="button">
+                                <img src="assets/icons/icons_gray/picture_svg.svg" class="size-5" alt="">
+                            </button>
+                            <button type="button">
+                                <img src="assets/icons/icons_gray/stickers.svg" class="size-5" alt="">
+                            </button>
+                            <button type="button">
+                                <img src="assets/icons/gif.svg" class="size-5" alt="">
+                            </button>
+                        </div>
+                        <div class="input-message w-2/4 ">
+                            <form (keydown.enter)="sendMessage(chat.id)">
+                                <input type="text" class="rounded-xl bg-bg-cancel w-full  border-none active:border-none" [formControl]="messagesControl" placeholder="Aa">
+                            </form>
+                        </div>
+                        <div class="liked-emoji w-auto">
+                            <button type="button">
+                                <img src="assets/icons/like.svg" class="size-5" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </ng-container>
-        
+
     </div>
 
 </div>

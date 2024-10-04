@@ -1,6 +1,11 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { combineLatest, map } from 'rxjs';
+import { Chat } from 'src/app/models/chat';
+import { Users } from 'src/app/models/users/users';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ChatService } from 'src/app/services/chats/chat.service';
 
 @Component({
   selector: 'app-users-list',
@@ -23,28 +28,40 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 
   ]
 })
-export class UsersListComponent{
+export class UsersListComponent {
 
   @Input() loading: boolean = false;
-  @Input() otherUsers: any = [];
+  @Input() otherUsers: Users[];
 
-  usuariosSeleccionados: any[] = [];
-  chatWithUser: any[] = [];
+  usuariosSeleccionados: Users[] = [];
+  chatWithUser: Users[] = [];
   isNew: boolean = false;
+  openChatControl: boolean = false;
 
-  constructor(private authService: AuthService){
+  chats$ = this.chatService.myChats$;
+  //messages$ = this.
+  onlyAChat: string = '';
+
+  chatListControl = new FormControl('');
+  messagesControl = new FormControl('');
+
+  constructor(private authService: AuthService, private chatService: ChatService){
+    
   }
-
+  
   // Funcion para agregar una nueva burbuja de chat
-
-  addNewBubbleChat(id: string) {
-    this.authService.getUsersSelectedById(id).subscribe((users:any) => {
+  
+  addNewBubbleChat(otherUser: Users) {
+    console.log(otherUser);
+    
+    this.chatService.createChat(otherUser).subscribe();
+    this.authService.getUsersSelectedById(otherUser.id_user).subscribe((users:any) => {
       if (users && users.length > 0) {
         const newUser = users[0];
         if (!this.usuarioYaSeleccionado(newUser)) {
           this.isNew = true;
           this.usuariosSeleccionados.push(newUser); 
-          this.deleteChat(id)       
+          this.deleteChat(otherUser)  
         } 
       } 
     });
@@ -54,42 +71,47 @@ export class UsersListComponent{
 
   deleteBubbleChat(userId:string){  
   const index = this.usuariosSeleccionados.findIndex(user => {
-    return user.id === userId || user.id_user === userId;
+    return user.id_user === userId || user.id_user === userId;
   });
   if (index !== -1) this.usuariosSeleccionados.splice(index, 1)[0];  
   }
 
   // Abrir el chat con el usuario seleccionado
 
-  openChat(userId: string) {
-    this.authService.getUsersSelectedById(userId).subscribe((users:any) => {
+  openChat(otherUser: Chat) {    
+    this.chatService.getUserChatsIds(otherUser).subscribe((users:any) => {
+      this.onlyAChat = users;
+            
       if (users && users.length > 0) {
         const newUser = users[0];
-        if (!this.chatYetOpened(newUser)) {
-          this.isNew = true;
-          this.chatWithUser.push(newUser);  
-          this.deleteBubbleChat(userId);      
-        } 
+        this.chatWithUser.push(newUser);  
+        this.openChatControl = true;  
       } 
     });
   }
 
-  deleteChat(userId: string) {
+  deleteChat(chat: any) {
     const index = this.chatWithUser.findIndex(user => {
-      return user.id === userId || user.id_user === userId;
+      return user.id_user === chat || user.id_user === chat;
     });
     if (index !== -1) this.chatWithUser.splice(index, 1)[0];  
   }
 
   // Función auxiliar para verificar si un usuario ya está en la lista
   private usuarioYaSeleccionado(user: any): boolean {
-    return this.usuariosSeleccionados.some(u => u.id === user.id);
+    return this.usuariosSeleccionados.some(u => u.id_user === user.id_user);
   }
 
   // Función auxiliar para verificar si un chat ya esta activo
 
-  private chatYetOpened(user: any): boolean {
-    return this.chatWithUser.some(u => u.id === user.id);
+  private chatYetOpened(user: Users): boolean {
+    return this.chatWithUser.some(u => u.id_user === user.id_user);
+  }
+
+  sendMessage(id_chat: string){
+    const message = this.messagesControl.value
+    this.chatService.addChatMessage(id_chat, message).subscribe()
+    this.messagesControl.setValue('');
   }
 
 }

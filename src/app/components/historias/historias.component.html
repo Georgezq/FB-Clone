@@ -83,12 +83,12 @@
         </a>
       </ng-container>
 
-      <ng-container *ngIf="user">
+      <!-- <ng-container *ngIf="user">
         <div class="container" id="userContainer">
           <img class="img-fluid" [src]="getUsuarioFoto(story.id_usuario)" alt="" id="fotoUserHistoria">
         </div>
         <p class="text-white" id="names">{{ getUsuarioNombre(story.id_usuario) }}</p>
-      </ng-container>
+      </ng-container> -->
     </div>
   </div>
 
@@ -149,7 +149,7 @@
 
 
                   <ng-container *ngFor="let comentario of comentario" >
-                    <div class="container" style="max-height: 200px; overflow-y: auto;">
+                    <!-- <div class="container" style="max-height: 200px; overflow-y: auto;">
                     <div class="form-floating mt-3 mb-1" *ngIf="comentario.id_historia === story.id_historia" >
                       <div class="form-floating mt-3 mb-1 d-flex" *ngFor="let usuario of user" >
                         <div class="row" *ngIf="comentario.id_usuario === usuario.id_user">
@@ -164,14 +164,14 @@
                             <div class="fw-bold">
                               <p class="text-dark text-start">{{ getUsuarioNombre(comentario.id_usuario) }}</p>
                             </div>
-                            <div> <!-- Ajusta la altura máxima según tus necesidades -->
+                            <div> 
                               <input type="email" class="form-control" id="floatingInput" [(ngModel)]="comentario.contenido" readonly>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   </ng-container>
 
 

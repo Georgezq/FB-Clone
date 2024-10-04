@@ -25,7 +25,8 @@ module.exports = {
         'primary-text': '#050505',
         
         //ICONS
-        'primary-icon': '#050505'
+        'primary-icon': '#050505',
+        'secondary-icon': '#BCC0C4'
 
 
       }
