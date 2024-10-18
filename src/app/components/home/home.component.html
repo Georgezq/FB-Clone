@@ -6,7 +6,12 @@
 />
 <div class="flex flex-row" id="main">
   <div class="basis-1/4">
-    <!-- <app-sidebar /> -->
+    <app-sidebar 
+      [userName]="nombre"
+      [lastName]="apellidos"
+      [userPhoto]="foto"
+      [loading]="loading"
+    />
   </div>
   <div class="basis-1/2">
     <!-- <app-historias /> -->

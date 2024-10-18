@@ -1,4 +1,4 @@
-<div class="container-fluid w-4/6 p-0 m-auto shadow-md publicacion-user">
+<section class="container-fluid w-4/6 p-0 m-auto shadow-md publicacion-user">
     
     <ng-template [ngIf]="loading">
         <div class=" flex flex-row items-center justify-center my-4 gap-2 w-full">
@@ -47,4 +47,11 @@
         </ul>
     </div>
     
-</div>
+</section>
+
+<section>
+    <ng-container *ngFor="let publicaciones of contenidoPublicacion">
+        <!-- <p> {{publicaciones.text_contenido}} </p> -->
+    </ng-container>
+    
+</section>

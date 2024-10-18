@@ -30,6 +30,9 @@ import { ErrorFormComponent } from './core/components/error-form/error-form.comp
 import { TooltipMessageComponent } from './core/components/tooltip-message/tooltip-message.component';
 import { UsersListComponent } from './components/publicaciones/users-list/users-list.component';
 
+import {MatListModule} from '@angular/material/list';
+import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.component'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,7 @@ import { UsersListComponent } from './components/publicaciones/users-list/users-
     ErrorFormComponent,
     TooltipMessageComponent,
     UsersListComponent,
+    SidebarComponent,
     
   ],
   imports: [
@@ -52,6 +56,9 @@ import { UsersListComponent } from './components/publicaciones/users-list/users-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
+    MatListModule, 
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
