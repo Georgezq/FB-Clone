@@ -36,6 +36,7 @@ import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
 import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.component';
 import { DateDisplayPipe } from './core/pipes/date-display.pipe';
 import { DatePipe } from '@angular/common';
+import { DoPubComponent } from './components/publicaciones/do-pub/do-pub.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DatePipe } from '@angular/common';
     TooltipMessageComponent,
     UsersListComponent,
     SidebarComponent,
-    DateDisplayPipe
+    DateDisplayPipe,
+    DoPubComponent
   ],
   imports: [
     BrowserModule,

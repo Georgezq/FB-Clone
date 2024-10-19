@@ -14,12 +14,21 @@
     />
   </div>
   <div class="basis-1/2">
-    <!-- <app-historias /> -->
-     
+
+    <app-do-pub 
+    [userName]="nombre"
+    [userPhoto]="foto"
+    [loading]="loading"
+    />
+    
+    <app-historias 
+     [userPhoto]="foto"
+    />
+    
     <app-main-publicaciones
-      [userName]="nombre"
-      [userPhoto]="foto"
-      [loading]="loading"
+    [userName]="nombre"
+    [userPhoto]="foto"
+    [loading]="loading"
     />
   </div>
   <div class="basis-1/4">

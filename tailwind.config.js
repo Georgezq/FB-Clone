@@ -14,6 +14,7 @@ module.exports = {
         'bg-cancel': '#e4e6eb',
         'bg-icons': '#e4e6eb',
         'bg-text-hover': '#e6e6e6',
+        'bg-accent': '#0866ff',
 
         //BORDERS
         'br-error': '#dd3c10',
