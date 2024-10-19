@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, sendPasswordResetEmail, updateProfile, onAuthStateChanged } from '@angular/fire/auth';
 import { addDoc, collection, doc, docData, Firestore, getDoc, getFirestore, updateDoc, where, query, collectionData, limit  } from '@angular/fire/firestore';
-import { lastValueFrom, map, merge, Observable, take } from 'rxjs';
+import { lastValueFrom, map, merge, Observable, of, take } from 'rxjs';
 import { Chat } from 'src/app/models/chat';
 
 import { Users } from 'src/app/models/users/users';
@@ -20,6 +20,22 @@ export class AuthService {
     this.auth = getAuth(app);
     this.firestore = getFirestore(app);
   }
+
+  getUserById(userId: string): Observable<Users> {
+    if (!userId) {
+      // Si no hay userId, devolvemos un observable con null
+      return of(null);
+    }
+  
+    const userRef = collection(this.firestore, 'users');
+    const q = query(userRef, where('id_user', '==', userId));
+    return collectionData(q, { idField: 'id' }).pipe(
+      map(users => users[0] || null)  // Devolvemos el primer usuario encontrado o null si no existe
+    ) as Observable<Users>;
+  }
+  
+  
+  
 
   async registerForm(user: Users) {
     return await createUserWithEmailAndPassword(this.auth, user.email, user.password).then(

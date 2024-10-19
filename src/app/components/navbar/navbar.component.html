@@ -88,7 +88,7 @@
               <ng-container class="w-3/4" *ngFor="let profileOpt of profileOptions">
                 <div class="p-2 my-1 w-11/12 mx-auto">
                   <a href="#" [ngStyle]="{'cursor': navbarMenuActive ? 'pointer' : 'default'}"
-                    class="flex w-100 items-center justify-start gap-5 py-2">
+                    class="flex w-100 items-center justify-start gap-5 py-2 rounded-md">
                     <img src="{{ profileOpt.icon }}" class="size-7" [alt]="profileOpt.texto">
                     <span class="w-100 text-primary-text font-medium text-md break-words">{{ profileOpt.texto }}</span>
                   </a>

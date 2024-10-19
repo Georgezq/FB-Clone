@@ -31,7 +31,11 @@ import { TooltipMessageComponent } from './core/components/tooltip-message/toolt
 import { UsersListComponent } from './components/publicaciones/users-list/users-list.component';
 
 import {MatListModule} from '@angular/material/list';
-import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.component'; 
+import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
+
+import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.component';
+import { DateDisplayPipe } from './core/pipes/date-display.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,7 @@ import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.c
     TooltipMessageComponent,
     UsersListComponent,
     SidebarComponent,
-    
+    DateDisplayPipe
   ],
   imports: [
     BrowserModule,
@@ -56,16 +60,15 @@ import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.c
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-    MatListModule, 
-
+    MatListModule,  
+    MatTooltipModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
