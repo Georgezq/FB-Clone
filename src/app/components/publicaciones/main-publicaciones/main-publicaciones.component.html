@@ -95,6 +95,49 @@
                 </div>
                
             </div>
+            <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+
+            <ng-container *ngFor="let com of comentarios[pub.id]">
+              <div class="content-comments flex flex-row gap-2 my-2">
+                <div class="body-comment-profile">
+                  <img [src]="com.user?.foto" class="object-cover size-10 rounded-full" alt="Usuario del comentario">
+                </div>
+                <div class="body-comment">
+                  <div class="info bg-main-white px-4 py-2 rounded-[18px]">
+                    <p class="font-semibold">{{ com.user?.nombre + " " + com.user?.apellido }}</p>
+                    <p>{{ com.text }}</p>
+                  </div>
+                  <span class=" text-lg"> {{ com.sentDate | dateDisplay }} </span>
+                </div>
+              </div>
+            </ng-container> 
+            
+
+            <div class="comentario">
+              <div class="flex items-center gap-2">
+                <img
+                  [src]="userPhoto"
+                  class="size-12 rounded-full object-cover"
+                  alt="Foto user"
+                />
+                <form (keydown.enter)="sendComment(pub.id)" class="flex flex-row w-full gap-2">
+                  <input
+                  type="text"
+                  placeholder="Escribe un comentario..."
+                  [formControl]="commentControl"
+                  class="border border-gray-200 rounded-md w-full px-4 py-2 dark:border-gray-700 dark:text-gray-200"
+                />
+
+                <button type="button" class="">
+                  <img src="assets/icons/send.svg" class="size-6" alt="">
+                </button>
+                </form>
+
+               
+              </div>
+             
+            </div>
+
         </div>
       </div>
     </ng-template>

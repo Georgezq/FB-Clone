@@ -45,7 +45,7 @@ export class UsersListComponent implements OnInit{
   onlyAChat: string = '';
 
   chatListControl = new FormControl();
-  messagesControl = new FormControl('');
+messagesControl = new FormControl('');
 
   selectedChats$ = combineLatest([
     this.chatListControl.valueChanges,

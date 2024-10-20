@@ -1,0 +1,57 @@
+
+<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+    <span class="sr-only">Open sidebar</span>
+    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+    </svg>
+ </button>
+ 
+ <aside id="default-sidebar" class="fixed bg-white top-0 left-0 z-40 w-96 h-svh transition-transform -translate-x-full sm:translate-x-0 border-r-4 border-gray-50 shadow-lg" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+       <div class="contenido-header flex flex-col gap-y-10">
+        <span class="text-2xl font-bold">Tu historia</span>
+        <div class="user flex flex-row items-center gap-5">
+            <img [src]="foto" class="size-14 rounded-full object-cover" alt="">
+            <span class="text-lg"> {{nombre + ' ' + apellidos}} </span>    
+        </div>
+       </div>
+
+       <hr class="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700">
+
+        <ng-container *ngIf="addStoryWithText">
+            <span>opciones para crear una historia con el texto</span>
+        </ng-container>
+        
+    </div>
+ </aside>
+ 
+ <ng-container *ngIf="!addStoryWithImage && !addStoryWithText">
+    <div class="p-4 sm:ml-64 bg-main-white h-svh w-auto flex items-center justify-center gap-4">
+        <label for="dropzone-file" class="create-story-image cursor-pointer relative h-[330px] w-[220px] rounded-lg hover:saturate-150 transition">
+            <div class="absolute top-[40%] text-center w-full">
+                <img src="assets/icons/library_photo.svg" class="size-10 mx-auto bg-white rounded-full p-2 " alt="">
+                <span class="text-white font-semibold">Crear una historia con foto</span>
+                <input id="dropzone-file" type="file" class="hidden" accept="image/jpeg,jpg,png">
+            </div>
+        </label>
+        <button type="button" (click)="seeAddStoryWithText()" class="create-story-text cursor-pointer relative h-[330px] w-[220px] rounded-lg hover:saturate-150 transition">
+            <div class="absolute top-[40%] text-center w-full">
+                <img src="assets/icons/letters.svg" class="size-10 mx-auto bg-white rounded-full p-2 " alt="">
+                <span class="text-white font-semibold">Crear una historia con texto</span>
+            </div>
+        </button>
+     </div>
+ </ng-container>
+ 
+
+ <ng-container *ngIf="addStoryWithText">
+    <div class="p-4 sm:ml-64 bg-main-white h-svh w-auto flex items-center justify-center gap-4">
+        .
+    </div>
+ </ng-container>
+ 
+ <ng-container *ngIf="addStoryWithImage">
+    <span class="font-bold text-dark">crear historia con imagen</span>
+ </ng-container>
+ 
+ 

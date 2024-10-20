@@ -1,0 +1,11 @@
+.create-story-image{
+    background-image: url("../../../../assets/images/fondo1.png");
+    background-position: no-repeat;
+    background-size: cover;
+}
+
+.create-story-text{
+    background-image: url("../../../../assets/images/fondo2.png");
+    background-position: no-repeat;
+    background-size: cover;    
+}

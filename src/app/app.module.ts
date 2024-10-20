@@ -37,6 +37,7 @@ import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.c
 import { DateDisplayPipe } from './core/pipes/date-display.pipe';
 import { DatePipe } from '@angular/common';
 import { DoPubComponent } from './components/publicaciones/do-pub/do-pub.component';
+import { CreateStoryComponent } from './components/pages/create-story/create-story.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { DoPubComponent } from './components/publicaciones/do-pub/do-pub.compone
     UsersListComponent,
     SidebarComponent,
     DateDisplayPipe,
-    DoPubComponent
+    DoPubComponent,
+    CreateStoryComponent
   ],
   imports: [
     BrowserModule,
