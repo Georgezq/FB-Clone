@@ -9,3 +9,31 @@
     background-position: no-repeat;
     background-size: cover;    
 }
+
+.type-claro{
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+}
+
+.type-informal{
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: normal;
+}
+
+.type-elegante{
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+}
+
+.type-titulo{
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: normal;
+}

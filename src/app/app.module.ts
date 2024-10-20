@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 //Imports
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -61,7 +61,6 @@ import { CreateStoryComponent } from './components/pages/create-story/create-sto
     BrowserModule,
     BrowserAnimationsModule, 
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatListModule,  

@@ -19,7 +19,41 @@
        <hr class="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700">
 
         <ng-container *ngIf="addStoryWithText">
-            <span>opciones para crear una historia con el texto</span>
+            <div class="content-options flex flex-col gap-y-6">
+                <textarea [formControl]="textoHistoria" placeholder="Empieza a escribir" class="w-full border rounded-md resize-none h-[100px] border-gray-300"></textarea>
+                <div class="select-type relative">
+                    <img src="assets/icons/letters.svg" class="absolute top-[20%] left-3" alt="icon">
+                    <select [formControl]="tipoTexto" class="w-full border rounded-sm h-[50px] ps-12 border-gray-300">
+                        <option value="claro" selected>Claro</option>
+                        <option value="informal">Informal</option>
+                        <option value="elegante">Elegante</option>
+                        <option value="titulo">Titulo</option>
+                    </select>
+                </div>
+                <div class="w-full border rounded-lg border-gray-300 h-[100px] flex flex-col items-start flex-wrap justify-start px-4 py-2 gap-y-1">
+                    <span class="text-gray-500">Fondos</span>
+                    <div class="fondos flex flex-row gap-2">
+                        <button class="rounded-full border" (click)="selectedOption = 'opcion1'">
+                            <img src="assets/images/backgrounds/opcionfondo1.jpg" class="size-6 rounded-full" alt="fondo1">
+                        </button>
+                        <button class="rounded-full border" (click)="selectedOption = 'opcion2'">
+                            <img src="assets/images/backgrounds/opcionfondo2.jpg" class="size-6 rounded-full" alt="fondo1">
+                        </button>
+                        <button class="rounded-full border" (click)="selectedOption = 'opcion3'">
+                            <img src="assets/images/backgrounds/opcionfondo3.jpg" class="size-6 rounded-full" alt="fondo1">
+                        </button>
+                        <button class="rounded-full border" (click)="selectedOption = 'opcion4'">
+                            <img src="assets/images/backgrounds/opcionfondo4.jpg" class="size-6 rounded-full" alt="fondo1">
+                        </button>
+                        <button class="rounded-full border" (click)="selectedOption = 'opcion5'">
+                            <img src="assets/images/backgrounds/opcionfondo5.jpg" class="size-6 rounded-full" alt="fondo1">
+                        </button>
+                        <button class="rounded-full border" (click)="selectedOption = 'opcion6'">
+                            <img src="assets/images/backgrounds/opcionfondo6.jpg" class="size-6 rounded-full" alt="fondo1">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </ng-container>
         
     </div>
@@ -46,7 +80,16 @@
 
  <ng-container *ngIf="addStoryWithText">
     <div class="p-4 sm:ml-64 bg-main-white h-svh w-auto flex items-center justify-center gap-4">
-        .
+        <div class="preview rounded-lg shadow-xl w-2/4 h-[90%] mx-auto bg-white">
+            <div class="text text-start m-4">
+                <span class="text-lg font-bold">Vista previa</span>
+            </div>
+            <div class="content-preview rounded-lg flex items-center justify-center bg-black h-[90%] w-[95%] text-center m-auto">
+                <div class="background rounded-lg h-[90%] w-2/4" >
+                    <textarea [value]="textoHistoria.value" [ngClass]="changeStyleText(tipoTexto.value)" [ngStyle]="getBackgroundStyle()" class="w-full h-full border-0 resize-none bg-transparent rounded-lg text-center text-white"></textarea>
+                </div>
+            </div>
+        </div>
     </div>
  </ng-container>
  
