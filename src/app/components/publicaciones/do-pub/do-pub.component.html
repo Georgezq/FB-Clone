@@ -76,19 +76,42 @@
                       </div>
                   </div>
                 </div>
-                <form class="flex flex-col">
+                <form class="flex flex-col overflow-y-auto ">
 
-                  <textarea name="" id="" [placeholder]="placeHolderText + ' ' + userName + '?'" class="placeholder:text-xl resize-none h-36 w-full border-0 shadow-[#fff]"></textarea>
-                  <div class="add-to-the-pub border rounded-lg flex flex-row items-center justify-between mx-6 px-4 py-2">
+                  <textarea name="" id="" [placeholder]="placeHolderText + ' ' + userName + '?'" class="placeholder:text-xl resize-none h-20 w-full border-0 shadow-[#fff]"></textarea>
+                  
+                  <ng-container *ngIf="addFoto">
+                    <div class="flex flex-row items-center mx-6 my-4">
+                      <label for="subir-foto" class="border border-gray-400 h-[200px] w-full rounded-lg flex items-center justify-center flex-col">
+                        <button (click)="addFoto = false" class="header ms-auto me-4">
+                          <img src="assets/icons/x_mark.svg" class="rounded-full bg-bg-cancel size-10 p-2 " alt="icono">
+                        </button>
+                        <div class="body">
+                          <img src="assets/icons/photo_plus.svg" class="rounded-full mx-auto p-3 bg-bg-cancel" alt="icono">
+                        <span>Agregar fotos/videos </span>
+                        </div>
+                        <input (change)="onFileSelected($event)" type="file" id="subir-foto" class="hidden" accept="image/jpeg,jpg,png">
+                      </label>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="previewPh">
+                    <div class="max-h-[300px] overflow-y-auto my-6">
+                      <img [src]="imageUrl" class="h-full w-auto object-cover" alt="foto preview">
+                    </div>
+                  </ng-container>
+                  
+                  
+                  <div class="add-to-the-pub border rounded-lg flex flex-row items-center justify-between mx-6 px-4 py-2">         
                     <span class="font-medium text-sm">Agregar a tu publicación</span>
                     <div class="list">
-                      <button type="button"> 
-                        <img src="assets/icons/library_photo.svg" alt="icon">
+                      <button type="button" (click)="addFoto = true"> 
+                        <img src="assets/icons/library_photo_green.svg" alt="icon">
                       </button>
                     </div>
                   </div>
                  <div class="button my-4">
-                  <button disabled class="font-semibold " type="submit">
+                  <button [disabled]="true" class="font-semibold text-white bg-bg-accent text-center w-full px-4 py-2 rounded-md disabled:bg-bg-cancel disabled:text-gray-400 disabled:font-bold" type="submit">
                     Publicar
                   </button>
                  </div>
