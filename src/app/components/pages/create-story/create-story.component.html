@@ -9,7 +9,12 @@
  <aside id="default-sidebar" class="fixed bg-white top-0 left-0 z-40 w-96 h-svh transition-transform -translate-x-full sm:translate-x-0 border-r-4 border-gray-50 shadow-lg" aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
        <div class="contenido-header flex flex-col gap-y-10">
+        <div class="flex flex-row gap-4 items-center">
+            <button [routerLink]="'/home'">
+                <img src="assets/icons/x_mark.svg" class="rounded-full bg-main-white size-12 p-2 " alt="">
+            </button>
         <span class="text-2xl font-bold">Tu historia</span>
+        </div>
         <div class="user flex flex-row items-center gap-5">
             <img [src]="foto" class="size-14 rounded-full object-cover" alt="">
             <span class="text-lg"> {{nombre + ' ' + apellidos}} </span>    
@@ -59,13 +64,13 @@
     </div>
  </aside>
  
- <ng-container *ngIf="!addStoryWithImage && !addStoryWithText">
+ <ng-container *ngIf="!imageUrl && !addStoryWithText">
     <div class="p-4 sm:ml-64 bg-main-white h-svh w-auto flex items-center justify-center gap-4">
         <label for="dropzone-file" class="create-story-image cursor-pointer relative h-[330px] w-[220px] rounded-lg hover:saturate-150 transition">
             <div class="absolute top-[40%] text-center w-full">
                 <img src="assets/icons/library_photo.svg" class="size-10 mx-auto bg-white rounded-full p-2 " alt="">
                 <span class="text-white font-semibold">Crear una historia con foto</span>
-                <input id="dropzone-file" type="file" class="hidden" accept="image/jpeg,jpg,png">
+                <input id="dropzone-file" (change)="onFileSelected($event)" type="file" class="hidden" accept="image/jpeg,jpg,png">
             </div>
         </label>
         <button type="button" (click)="seeAddStoryWithText()" class="create-story-text cursor-pointer relative h-[330px] w-[220px] rounded-lg hover:saturate-150 transition">
@@ -82,19 +87,30 @@
     <div class="p-4 sm:ml-64 bg-main-white h-svh w-auto flex items-center justify-center gap-4">
         <div class="preview rounded-lg shadow-xl w-2/4 h-[90%] mx-auto bg-white">
             <div class="text text-start m-4">
-                <span class="text-lg font-bold">Vista previa</span>
+                <span class="text-sm font-semibold">Vista previa</span>
             </div>
             <div class="content-preview rounded-lg flex items-center justify-center bg-black h-[90%] w-[95%] text-center m-auto">
                 <div class="background rounded-lg h-[90%] w-2/4" >
-                    <textarea [value]="textoHistoria.value" [ngClass]="changeStyleText(tipoTexto.value)" [ngStyle]="getBackgroundStyle()" class="w-full h-full border-0 resize-none bg-transparent rounded-lg text-center text-white"></textarea>
+                    <textarea [value]="textoHistoria.value" placeholder="EMPIEZA A ESCRIBIR" [ngClass]="changeStyleText(tipoTexto.value)" [ngStyle]="getBackgroundStyle()" class="w-full h-full border-0 resize-none bg-transparent rounded-lg text-center text-white placeholder:text-white leading-10 flex items-center justify-center py-72 snap-none"></textarea>
                 </div>
             </div>
         </div>
     </div>
  </ng-container>
  
- <ng-container *ngIf="addStoryWithImage">
-    <span class="font-bold text-dark">crear historia con imagen</span>
+ <ng-container *ngIf="imageUrl">
+    <div class="p-4 sm:ml-64 bg-main-white h-svh w-auto flex items-center justify-center gap-4">
+        <div class="preview rounded-lg shadow-xl w-2/4 h-[90%] mx-auto bg-white">
+            <div class="text text-start m-4">
+                <span class="text-sm font-semibold">Vista previa</span>
+            </div>
+            <div class="content-preview rounded-lg flex items-center justify-center bg-black h-[90%] w-[95%] text-center m-auto">
+                <div class="background rounded-lg h-[90%] w-2/4" >
+                   <img [src]="imageUrl" class="h-full object-cover" alt="preview de la foto">
+                </div>
+            </div>
+        </div>
+    </div>
  </ng-container>
  
  

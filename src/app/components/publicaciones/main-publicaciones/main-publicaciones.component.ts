@@ -11,7 +11,7 @@ import { PublicationService } from 'src/app/services/publication/publication.ser
   templateUrl: './main-publicaciones.component.html',
   styleUrls: ['./main-publicaciones.component.css']
 })
-export class MainPublicacionesComponent implements OnInit{
+export class MainPublicacionesComponent {
 
   @Input() userName: string = '';
   @Input() userPhoto: string = '';
@@ -24,10 +24,6 @@ export class MainPublicacionesComponent implements OnInit{
   comentarios: { [key: string]: PublicationComments[] } = {}; // Almacenar los comentarios por publicación  
 
   constructor(private publicacionesService: PublicationService) { 
-  }
-  
-  
-  ngOnInit(): void {
     this.getPublicaciones();
   }
 
@@ -51,6 +47,7 @@ export class MainPublicacionesComponent implements OnInit{
   }
 
   sendComment(id: any){
+    
     if(this.commentControl.value){
       this.publicacionesService.addCommentToPub(id, this.commentControl.value).subscribe();
       this.commentControl.setValue('');

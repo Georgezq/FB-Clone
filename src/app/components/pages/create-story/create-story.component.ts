@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class CreateStoryComponent {
 
-  addStoryWithText: boolean = true;
+  addStoryWithText: boolean = false;
   addStoryWithImage: boolean = false;
 
   nombre: string = '';
@@ -18,15 +18,44 @@ export class CreateStoryComponent {
   selectedOption: string = '';  // Esta es la opción seleccionada
 
   textoHistoria = new FormControl('');
+  imagenHistoria = new FormControl('');
   tipoTexto = new FormControl('claro');
+  imageUrl: string | ArrayBuffer | null = null;
 
   seeAddStoryWithText(){
     this.addStoryWithText = true;
   }
 
+  seeAddStoryWithImage(){
+    console.log(this.imagenHistoria.value);
+    this.imagenHistoria.valueChanges.subscribe((res) => console.log(res) )
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file && this.isValidImageFile(file)) {
+      const reader = new FileReader();
+      
+      reader.onload = (e) => {
+        this.imageUrl = e.target?.result || null;
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      console.error('Archivo no válido o no es una imagen');
+      // Aquí podrías mostrar un mensaje de error al usuario
+    }
+  }
+
+  private isValidImageFile(file: File): boolean {
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    return validTypes.includes(file.type);
+  }
+
   
   constructor(private authService: AuthService){
     
+   this.seeAddStoryWithImage()
   }
 
   getBackgroundStyle() {

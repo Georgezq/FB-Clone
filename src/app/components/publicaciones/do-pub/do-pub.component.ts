@@ -8,7 +8,14 @@ import { Component, Input } from '@angular/core';
 export class DoPubComponent {
 
   @Input() userName: string = '';
+  @Input() lastName: string = '';
   @Input() userPhoto: string = '';
   @Input() loading: boolean = false;
+
+  placeHolderText: string;
+
+  constructor() {
+    this.placeHolderText = `¿Qué estás pensando,`;
+  }
 
 }
