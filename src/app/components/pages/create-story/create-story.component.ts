@@ -26,10 +26,6 @@ export class CreateStoryComponent {
     this.addStoryWithText = true;
   }
 
-  seeAddStoryWithImage(){
-    console.log(this.imagenHistoria.value);
-    this.imagenHistoria.valueChanges.subscribe((res) => console.log(res) )
-  }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -42,7 +38,6 @@ export class CreateStoryComponent {
 
       reader.readAsDataURL(file);
     } else {
-      console.error('Archivo no válido o no es una imagen');
       // Aquí podrías mostrar un mensaje de error al usuario
     }
   }
@@ -54,8 +49,6 @@ export class CreateStoryComponent {
 
   
   constructor(private authService: AuthService){
-    
-   this.seeAddStoryWithImage()
   }
 
   getBackgroundStyle() {

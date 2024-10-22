@@ -15,7 +15,7 @@ export class DoPubComponent {
   placeHolderText: string;
 
   constructor() {
-    this.placeHolderText = `¿Qué estás pensando,`;
+    this.placeHolderText = `¿Qué estás pensando, `;
   }
 
 }
