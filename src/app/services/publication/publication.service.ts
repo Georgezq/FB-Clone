@@ -24,13 +24,14 @@ export class PublicationService {
 
   getPublications(): Observable<Publication[]> {
     const ref = collection(this.firestore, 'publications');
-    return collectionData(ref, { idField: 'id' }) as Observable<Publication[]>;
+    const queryAll = query(ref, orderBy('fechaPublicacion', 'desc' ))
+    return collectionData(queryAll, { idField: 'id' }) as Observable<Publication[]>;
   }
 
   getPubComments$(publicationId: string): Observable<PublicationComments[]>{
     const ref = collection(this.firestore, 'publications', publicationId, 'comments')
-    
-    return collectionData(ref) as Observable<PublicationComments[]>
+    const queryAll = query(ref, orderBy('sendtDate', 'asc' ))    
+    return collectionData(queryAll, {idField: 'id'}) as Observable<PublicationComments[]>
   }
 
   getPublicationsWithUser(): Observable<Publication[]> {
@@ -44,6 +45,20 @@ export class PublicationService {
         return combineLatest(userObservables);  // Retorna un array con todas las publicaciones y sus usuarios
       })
     );
+  }
+
+  addPub(pubBody: Publication): Observable<any>{
+    const ref = collection(this.firestore, 'publications');
+    const today = Timestamp.fromDate(new Date())
+    return this.authService.getUserLogged().pipe(
+      take(1),
+      concatMap((user) => addDoc(ref, {
+        id_user: user?.id_user,
+        texto_contenido: pubBody.texto_contenido || null,
+        imagen_contenido: pubBody?.imagen_contenido || null,
+        fechaPublicacion: today
+      })) 
+    )
   }
 
   getPubCommentWithUser(id:any): Observable<PublicationComments[]> {

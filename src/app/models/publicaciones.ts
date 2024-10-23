@@ -8,10 +8,8 @@ export interface Publication {
     lastCommentDate?: Date;
     fechaPublicacion: Date & Timestamp;
     user?: Users;
-    contenido: {
-        imagen_contenido: string;
-        texto_contenido: string;
-    };
+    imagen_contenido?: string;
+    texto_contenido?: string;
 
 }
 
@@ -19,5 +17,5 @@ export interface PublicationComments {
     text: string;
     senderId: string;
     user?: Users;
-    sentDate: Date & Timestamp;
+    sendtDate: Date & Timestamp;
 }

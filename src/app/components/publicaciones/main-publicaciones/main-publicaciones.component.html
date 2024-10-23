@@ -63,10 +63,10 @@
           </div>
         </div>
         <div class="content my-2 px-2 py-2">
-          <p class="mb-2">{{ pub?.contenido.texto_contenido }}</p>
+          <p class="mb-2">{{ pub?.texto_contenido }}</p>
           <img
-            *ngIf="pub.contenido.imagen_contenido.length > 0"
-            [src]="pub?.contenido.imagen_contenido"
+            *ngIf="pub?.imagen_contenido != null"
+            [src]="pub?.imagen_contenido"
             alt="Foto de la publicacion"
             class="object-cover w-min-[400px] <w-max-full></w-max-full> h-[500px] rounded-md mx-auto "
           />
@@ -107,7 +107,7 @@
                     <p class="font-semibold">{{ com.user?.nombre + " " + com.user?.apellido }}</p>
                     <p>{{ com.text }}</p>
                   </div>
-                  <span class=" text-lg"> {{ com.sentDate | dateDisplay }} </span>
+                  <span class=" text-sm text-gray-500 px-4"> {{ com.sendtDate | dateDisplay }} </span>
                 </div>
               </div>
             </ng-container> 
