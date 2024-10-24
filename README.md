@@ -35,3 +35,15 @@ export const environment = {
   }
 };
 ```
+
+## Un vistazo a la aplicación
+
+Algunos de los aspectos propios del acceso a Fb se mantienen. (Sección funcional!)
+
+![Login](assets/readme/image.png)
+
+![Home](assets/readme/image-1.png)
+
+![Create](assets/readme/image-2.png)
+
+¡Hay otras secciones más por descubrir, inténtelo!
