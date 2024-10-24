@@ -15,11 +15,18 @@
           type="button"
           data-modal-target="default-modal"
           data-modal-toggle="default-modal"
+          (click)="addFoto = false"
           class="publication rounded-2xl hover:cursor-pointer text-start"
         >
-          ¿Qué estás pensando, {{ userName }}?
+          <ng-container *ngIf="pubForm.get('texto_contenido')?.value.length > 0; else text">
+            <p>{{pubForm.get('texto_contenido')?.value }}</p>
+          </ng-container>
+          <ng-template #text>
+            <p>¿Qué estás pensando, {{ userName }}?</p>
+          </ng-template>
+          
+          
         </button>
-        <button (click)="validar()">ver</button>
         <div
           id="default-modal"
           tabindex="-1"
@@ -156,8 +163,8 @@
                   </div>
                   <div class="button my-4">
                     <button
-                      [disabled]="pubForm.invalid"
-                      class="font-semibold text-white bg-bg-accent text-center w-full px-4 py-2 rounded-md disabled:bg-bg-cancel disabled:text-gray-400 disabled:font-bold"
+                    [disabled]="!pubForm.get('texto_contenido')?.value && imageUrl === null"                      
+                    class="font-semibold text-white bg-bg-accent text-center w-full px-4 py-2 rounded-md disabled:bg-bg-cancel disabled:text-gray-400 disabled:font-bold"
                       type="submit"
                     >
                       Publicar
@@ -182,7 +189,8 @@
           >Video en vivo</span
         >
       </button>
-      <button class="flex flex-row gap-2 items-center">
+      <button class="flex flex-row gap-2 items-center" (click)="addFoto = true" data-modal-target="default-modal"
+      data-modal-toggle="default-modal">
         <img src="assets/icons/picture_svg.svg" class="size-6" alt="" />
         <span class="text-[#65676b] font-semibold text-sm my-auto"
           >Foto/video</span

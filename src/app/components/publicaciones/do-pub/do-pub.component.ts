@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { getDownloadURL, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Publication } from 'src/app/models/publicaciones';
 import { PublicationService } from 'src/app/services/publication/publication.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -60,12 +59,8 @@ export class DoPubComponent implements OnInit{
       // Aquí podrías mostrar un mensaje de error al usuario
     }
   }
-
-  validar(){
-    console.log(this.pubForm.value);
-    
-  }
   
+ 
   private isValidImageFile(file: File): boolean {
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     return validTypes.includes(file.type);
@@ -80,12 +75,12 @@ export class DoPubComponent implements OnInit{
     
     // Enviar el formulario a Firebase solo después de obtener la URL
     this.pubService.addPub(this.pubForm.value).subscribe(() => {
-      this.pubForm.reset(); // Limpiar el formulario después de enviar
+       this.pubForm.reset(); // Limpiar el formulario después de enviar
+      this.closeModal();
     });
   }
 
   async onFileSelectedToAdd(){
-    // const archivoSeleccionado:File = event.target.files[0];
     await this.uploadFile(this.file)
   }
 
@@ -112,6 +107,16 @@ export class DoPubComponent implements OnInit{
         }
       );
     });
+  }
+
+
+  // Cerrar modal
+
+  closeModal(){
+    const closeButton = document.querySelector('[data-modal-hide="default-modal"]');
+    if (closeButton) {
+      closeButton.dispatchEvent(new Event('click'));
+    }
   }
 
 }
