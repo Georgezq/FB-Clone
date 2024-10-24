@@ -1,65 +1,105 @@
 <ng-container *ngFor="let pub of contenidoPublicacion; let i = index">
   <section class="container-fluid w-4/6 p-0 m-auto shadow-md publicacion-user">
     <ng-template [ngIf]="!loadingPublicaciones">
-        <div
-          role="status"
-          class="max-w-sm p-4 rounded animate-pulse md:p-1 dark:border-gray-700"
-        >
-          <div class="flex items-center mt-4">
-            <svg
-              class="size-12 me-3 text-gray-200 dark:text-gray-700"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
-              />
-            </svg>
-            <div class="publication rounded-2xl">
-              <div
-                class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"
-              ></div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"
-        ></div>
-        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-  
-        <div
-          class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700"
-        >
+      <div
+        role="status"
+        class="max-w-sm p-4 rounded animate-pulse md:p-1 dark:border-gray-700"
+      >
+        <div class="flex items-center mt-4">
           <svg
-            class="w-10 h-10 text-gray-200 dark:text-gray-600"
+            class="size-12 me-3 text-gray-200 dark:text-gray-700"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
-            viewBox="0 0 16 20"
+            viewBox="0 0 20 20"
           >
             <path
-              d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"
-            />
-            <path
-              d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
+              d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
             />
           </svg>
+          <div class="publication rounded-2xl">
+            <div
+              class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"
+            ></div>
+          </div>
         </div>
-      </ng-template>
+      </div>
+      <div
+        class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"
+      ></div>
+      <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+      <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+
+      <div
+        class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700"
+      >
+        <svg
+          class="w-10 h-10 text-gray-200 dark:text-gray-600"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 16 20"
+        >
+          <path
+            d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"
+          />
+          <path
+            d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
+          />
+        </svg>
+      </div>
+    </ng-template>
     <ng-template [ngIf]="loadingPublicaciones">
       <div class="publicaciones">
-        <div class="header flex flex-row gap-2 items-center justify-start">
-          <img
-            [src]="pub.user?.foto"
-            class="size-9 rounded-full object-cover"
-            alt="Foto user"
-          />
-          <div class="info-pub">
-            <p class="font-semibold">{{ pub.user?.nombre + " " + pub?.user.apellido }}</p>
-            <span class="text-gray-500 text-sm"> {{pub.fechaPublicacion | dateDisplay  }} </span>
+        <div class="header flex flex-row gap-2 items-center justify-between">
+          <div class="start flex flex-row gap-x-2 items-center">
+            <img
+              [src]="pub.user?.foto"
+              class="size-9 rounded-full object-cover"
+              alt="Foto user"
+            />
+            <div class="info-pub">
+              <p class="font-semibold">
+                {{ pub.user?.nombre + " " + pub?.user.apellido }}
+              </p>
+              <span class="text-gray-500 text-sm">
+                {{ pub.fechaPublicacion | dateDisplay }}
+              </span>
+            </div>
+          </div>
+          <div class="end options relative">
+            <button
+              id="dropdownMenuIconButton"
+              (click)="toggleDropdown(pub.id)"
+              type="button"
+            >
+              <img
+                src="assets/icons/ellipsis_v.svg"
+                class="size-10 rounded-full hover:bg-bg-cancel p-2"
+                alt="icon"
+              />
+            </button>
+
+            <!-- Dropdown menu -->
+            <div
+              *ngIf="activeDropdownId === pub.id"
+              class="absolute right-0 bg-white divide-y divide-gray-100 rounded-lg w-60 dark:bg-gray-700 dark:divide-gray-600 shadow-lg"
+            >
+              <div
+                class="py-4 text-[16px] text-start ms-0 flex flex-col text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownMenuIconButton"
+              >
+              <button class="flex flex-row items-center justify-start gap-x-4 hover:bg-bg-cancel py-2 px-4 rounded-md mx-2" *ngIf="pub.id_user === userId">
+                <img src="assets/icons/edit.svg" class="size-6" alt="">                
+                Editar
+              </button>      
+              <button *ngIf="pub.id_user === userId" class="flex flex-row items-center justify-start gap-x-4 hover:bg-bg-cancel py-2 px-4 rounded-md mx-2">
+                <img src="assets/icons/delete.svg" class="size-6" alt="">
+                Eliminar
+              </button>      
+            </div>
+          
+            </div>
           </div>
         </div>
         <div class="content my-2 px-2 py-2">
@@ -68,60 +108,92 @@
             *ngIf="pub?.imagen_contenido != null"
             [src]="pub?.imagen_contenido"
             alt="Foto de la publicacion"
-            class="object-cover w-min-[400px] <w-max-full></w-max-full> h-[500px] rounded-md mx-auto "
+            class="object-cover w-min-[400px] <w-max-full></w-max-full> h-[500px] rounded-md mx-auto"
           />
         </div>
         <div class="footer">
-            <div class="divider">
-                <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
-                <div class="opciones-pub text-[#5f6771] text-sm flex flex-row justify-around items-center">
-                    <!-- <app-tooltip-message [id]="i" message="kjk" /> -->
-                    <button type="button" class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2">
-                        <img src="assets/icons/like.svg" class="size-6" alt="like">
-                        Me gusta
-                    </button>
-                    <button class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2">
-                        <img src="assets/icons/comment.svg" class="size-6" alt="comentarios">
-                        Comentar
-                    </button>
-                    <button class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2">
-                        <img src="assets/icons/shared.svg" class="size-6" alt="comentarios">
-                        Enviar
-                    </button>
-                    <button class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2">
-                        <img src="assets/icons/whatsapp.svg" class="size-6" alt="comentarios">
-                        Compartir
-                    </button>
-                </div>
-               
-            </div>
-            <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
-
-            <ng-container *ngFor="let com of comentarios[pub.id]">
-              <div class="content-comments flex flex-row gap-2 my-2">
-                <div class="body-comment-profile">
-                  <img [src]="com.user?.foto" class="object-cover size-10 rounded-full" alt="Usuario del comentario">
-                </div>
-                <div class="body-comment">
-                  <div class="info bg-main-white px-4 py-2 rounded-[18px]">
-                    <p class="font-semibold">{{ com.user?.nombre + " " + com.user?.apellido }}</p>
-                    <p>{{ com.text }}</p>
-                  </div>
-                  <span class=" text-sm text-gray-500 px-4"> {{ com.sendtDate | dateDisplay }} </span>
-                </div>
-              </div>
-            </ng-container> 
-            
-
-            <div class="comentario">
-              <div class="flex items-center gap-2">
+          <div class="divider">
+            <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
+            <div
+              class="opciones-pub text-[#5f6771] text-sm flex flex-row justify-around items-center"
+            >
+              <!-- <app-tooltip-message [id]="i" message="kjk" /> -->
+              <button
+                type="button"
+                class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2"
+              >
+                <img src="assets/icons/like.svg" class="size-6" alt="like" />
+                Me gusta
+              </button>
+              <button
+                class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2"
+              >
                 <img
-                  [src]="userPhoto"
-                  class="size-12 rounded-full object-cover"
-                  alt="Foto user"
+                  src="assets/icons/comment.svg"
+                  class="size-6"
+                  alt="comentarios"
                 />
-                <form (keydown.enter)="sendComment(pub.id)" class="flex flex-row w-full gap-2">
-                  <input
+                Comentar
+              </button>
+              <button
+                class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2"
+              >
+                <img
+                  src="assets/icons/shared.svg"
+                  class="size-6"
+                  alt="comentarios"
+                />
+                Enviar
+              </button>
+              <button
+                class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2"
+              >
+                <img
+                  src="assets/icons/whatsapp.svg"
+                  class="size-6"
+                  alt="comentarios"
+                />
+                Compartir
+              </button>
+            </div>
+          </div>
+          <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
+
+          <ng-container *ngFor="let com of comentarios[pub.id]">
+            <div class="content-comments flex flex-row gap-2 my-2">
+              <div class="body-comment-profile">
+                <img
+                  [src]="com.user?.foto"
+                  class="object-cover size-10 rounded-full"
+                  alt="Usuario del comentario"
+                />
+              </div>
+              <div class="body-comment">
+                <div class="info bg-main-white px-4 py-2 rounded-[18px]">
+                  <p class="font-semibold">
+                    {{ com.user?.nombre + " " + com.user?.apellido }}
+                  </p>
+                  <p>{{ com.text }}</p>
+                </div>
+                <span class="text-sm text-gray-500 px-4">
+                  {{ com.sendtDate | dateDisplay }}
+                </span>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="comentario">
+            <div class="flex items-center gap-2">
+              <img
+                [src]="userPhoto"
+                class="size-12 rounded-full object-cover"
+                alt="Foto user"
+              />
+              <form
+                (keydown.enter)="sendComment(pub.id)"
+                class="flex flex-row w-full gap-2"
+              >
+                <input
                   type="text"
                   placeholder="Escribe un comentario..."
                   [formControl]="commentControl"
@@ -129,20 +201,13 @@
                 />
 
                 <button type="button" class="">
-                  <img src="assets/icons/send.svg" class="size-6" alt="">
+                  <img src="assets/icons/send.svg" class="size-6" alt="" />
                 </button>
-                </form>
-
-               
-              </div>
-             
+              </form>
             </div>
-
+          </div>
         </div>
       </div>
     </ng-template>
-    
   </section>
 </ng-container>
-
-

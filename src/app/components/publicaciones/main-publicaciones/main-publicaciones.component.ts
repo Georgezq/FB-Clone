@@ -16,15 +16,21 @@ export class MainPublicacionesComponent {
   @Input() userName: string = '';
   @Input() userPhoto: string = '';
   @Input() loading: boolean = false;
+  @Input() userId: string = '';
   loadingPublicaciones: boolean = false;
   // @Input() publications: any[] = [];
   contenidoPublicacion: Publication[];
   usuarioPublicacion: Users[];
   commentControl = new FormControl('');
   comentarios: { [key: string]: PublicationComments[] } = {}; // Almacenar los comentarios por publicación  
+  activeDropdownId: string | null = null;
 
   constructor(private publicacionesService: PublicationService) { 
     this.getPublicaciones();
+  }
+
+  toggleDropdown(pubId: string): void {
+    this.activeDropdownId = this.activeDropdownId === pubId ? null : pubId;
   }
 
   getPublicaciones() {

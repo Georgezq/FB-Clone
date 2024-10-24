@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   nombre: string = '';
   foto: string = '';
   apellidos: string = '';
+  userId: string = '';
 
   loading: boolean = false;
 
@@ -30,6 +31,8 @@ export class HomeComponent implements OnInit {
       this.nombre = user.nombre;
       this.foto = user.foto;
       this.apellidos = user.apellido;
+      this.userId = user.id_user;
+      
       
       this.loading = true;
     })
