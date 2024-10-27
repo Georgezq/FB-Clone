@@ -38,6 +38,7 @@ import { DateDisplayPipe } from './core/pipes/date-display.pipe';
 import { DatePipe } from '@angular/common';
 import { DoPubComponent } from './components/publicaciones/do-pub/do-pub.component';
 import { CreateStoryComponent } from './components/pages/create-story/create-story.component';
+import { ModalPubliComponent } from './components/publicaciones/modal-publi/modal-publi.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { CreateStoryComponent } from './components/pages/create-story/create-sto
     DateDisplayPipe,
     DoPubComponent,
     CreateStoryComponent,
+    ModalPubliComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { map, switchMap } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Publication, PublicationComments } from 'src/app/models/publicaciones';
 import { Users } from 'src/app/models/users/users';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { PublicationService } from 'src/app/services/publication/publication.service';
+import { Modal } from 'flowbite';
 
 @Component({
   selector: 'app-main-publicaciones',
@@ -15,18 +14,21 @@ export class MainPublicacionesComponent {
 
   @Input() userName: string = '';
   @Input() userPhoto: string = '';
+  @Input() lastName: string = '';
   @Input() loading: boolean = false;
   @Input() userId: string = '';
   loadingPublicaciones: boolean = false;
-  // @Input() publications: any[] = [];
   contenidoPublicacion: Publication[];
   usuarioPublicacion: Users[];
   commentControl = new FormControl('');
   comentarios: { [key: string]: PublicationComments[] } = {}; // Almacenar los comentarios por publicación  
   activeDropdownId: string | null = null;
+  modalOpen: boolean = false;
+  editingData: any = null;
 
-  constructor(private publicacionesService: PublicationService) { 
+  constructor(private publicacionesService: PublicationService, private fb: FormBuilder) { 
     this.getPublicaciones();
+    
   }
 
   toggleDropdown(pubId: string): void {
@@ -52,12 +54,31 @@ export class MainPublicacionesComponent {
     });
   }
 
+
   sendComment(id: any){
     
     if(this.commentControl.value){
       this.publicacionesService.addCommentToPub(id, this.commentControl.value).subscribe();
       this.commentControl.setValue('');
     }
+  }
+
+  deletePub(id: any) {
+    this.publicacionesService.deletePUB(id).subscribe();
+  }
+
+  // MODAL PARA EDITAR
+
+  openEditModal(item: any = null): void {
+    this.editingData = item;    
+    this.modalOpen = !this.modalOpen;
+    console.log(this.editingData.imagen_contenido);
+    
+  }
+
+  closeModal(): void {
+    this.modalOpen = false;
+    this.editingData = null;
   }
 
 

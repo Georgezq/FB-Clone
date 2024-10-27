@@ -58,10 +58,10 @@
               class="size-9 rounded-full object-cover"
               alt="Foto user"
             />
-            <div class="info-pub">
-              <p class="font-semibold">
+            <div class="info-pub flex flex-col">
+              <button class="font-semibold">
                 {{ pub.user?.nombre + " " + pub?.user.apellido }}
-              </p>
+              </button>
               <span class="text-gray-500 text-sm">
                 {{ pub.fechaPublicacion | dateDisplay }}
               </span>
@@ -69,6 +69,7 @@
           </div>
           <div class="end options relative">
             <button
+              *ngIf="pub.id_user === userId"
               id="dropdownMenuIconButton"
               (click)="toggleDropdown(pub.id)"
               type="button"
@@ -89,19 +90,37 @@
                 class="py-4 text-[16px] text-start ms-0 flex flex-col text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownMenuIconButton"
               >
-              <button class="flex flex-row items-center justify-start gap-x-4 hover:bg-bg-cancel py-2 px-4 rounded-md mx-2" *ngIf="pub.id_user === userId">
-                <img src="assets/icons/edit.svg" class="size-6" alt="">                
-                Editar
-              </button>      
-              <button *ngIf="pub.id_user === userId" class="flex flex-row items-center justify-start gap-x-4 hover:bg-bg-cancel py-2 px-4 rounded-md mx-2">
-                <img src="assets/icons/delete.svg" class="size-6" alt="">
-                Eliminar
-              </button>      
-            </div>
-          
+                <button
+                  class="flex flex-row items-center justify-start gap-x-4 hover:bg-bg-cancel py-2 px-4 rounded-md mx-2"
+                  (click)="openEditModal(pub)"
+                >
+                  <img src="assets/icons/edit.svg" class="size-6" alt="" />
+                  Editar
+                </button>
+                <app-modal-publi
+                  [userPhoto]="userPhoto"
+                  [userName]="userName"
+                  [lastName]="lastName"
+                  [userPhoto]="userPhoto"
+                  [isEditing]="true"
+                  [isOpen]="modalOpen"
+                  (close)="closeModal()"
+                  [initialData]="editingData"
+                  [previewPh]="!!editingData?.imagen_contenido"
+                />
+
+                <button
+                  class="flex flex-row items-center justify-start gap-x-4 hover:bg-bg-cancel py-2 px-4 rounded-md mx-2"
+                  (click)="deletePub(pub.id)"
+                >
+                  <img src="assets/icons/delete.svg" class="size-6" alt="" />
+                  Eliminar
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="content my-2 px-2 py-2">
           <p class="mb-2">{{ pub?.texto_contenido }}</p>
           <img

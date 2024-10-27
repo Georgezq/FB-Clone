@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { Auth, getAuth } from '@angular/fire/auth';
-import { addDoc, collection, collectionData, doc, Firestore, getFirestore, orderBy, query, Timestamp, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, getFirestore, orderBy, query, Timestamp, updateDoc } from '@angular/fire/firestore';
 import { AuthService } from '../auth/auth.service';
-import { combineLatest, concatMap, map, Observable, switchMap, take } from 'rxjs';
+import { combineLatest, concatMap, from, map, Observable, switchMap, take } from 'rxjs';
 import { Publication, PublicationComments } from 'src/app/models/publicaciones';
 
 @Injectable({
@@ -74,6 +74,15 @@ export class PublicationService {
       )
     )
   }
+
+  editPub(){
+  }
+
+  deletePUB(id: any): Observable<void> {
+    const destinoDocRef = doc(this.firestore, `publications/${id}`);
+    return from(deleteDoc(destinoDocRef));
+  }
+  
   
   addCommentToPub(publicationId: string, comment: string): Observable<any>{
     const ref = collection(this.firestore, 'publications', publicationId, 'comments');
