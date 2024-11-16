@@ -75,7 +75,9 @@ export class PublicationService {
     )
   }
 
-  editPub(){
+  editPub(id:any, pub: Partial<Publication>): Observable<void>{
+    const destinoDocRef = doc(this.firestore, `publications/${id}`);
+    return from(updateDoc(destinoDocRef, pub));    
   }
 
   deletePUB(id: any): Observable<void> {

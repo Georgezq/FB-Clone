@@ -32,18 +32,28 @@ export class ModalPubliComponent implements OnInit, OnChanges{
   @Input() previewPh: boolean = false;
   pub: Publication;
   file: any;
-
-  textfile: string = 'Seleccionar imagen...';
-
   formData: FormData;
   url: string;
   fileRef:any;
+  submmitted: boolean = false;
 
   constructor(private pubService: PublicationService, private fb: FormBuilder, private storage: Storage) {
     this.placeHolderText = `¿Qué estás pensando, `;   
   }
 
-  async ngOnInit() {
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    // Detectar cambios en initialData y actualizar el formulario
+    if (changes['initialData'] && this.initialData && this.pubForm) {
+      this.pubForm.patchValue({
+        texto_contenido: this.initialData.texto_contenido || '',
+        imagen_contenido: this.imageUrl = this.initialData.imagen_contenido || ''
+      });
+      this.itemIdToEdit = this.initialData.id;
+    }
+  }
+  
+  ngOnInit() {
     
   // Inicializar formulario reactivo
   this.pubForm =  this.fb.group({
@@ -52,17 +62,6 @@ export class ModalPubliComponent implements OnInit, OnChanges{
   });
   
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // Detectar cambios en initialData y actualizar el formulario
-    if (changes['initialData'] && this.initialData) {
-      this.pubForm.patchValue({
-        texto_contenido: this.initialData.texto_contenido || '',
-        imagen_contenido: this.imageUrl = this.initialData.imagen_contenido || ''
-      });
-    }
-  }
-
   onFileSelected(event: any): void {
     this.file = event.target.files[0];
     if (this.file && this.isValidImageFile(this.file)) {
@@ -92,12 +91,21 @@ export class ModalPubliComponent implements OnInit, OnChanges{
       await this.onFileSelectedToAdd(); // Esperar a que la imagen se suba y obtener la URL
       this.pubForm.patchValue({ 'imagen_contenido': this.url }); // Asignar la URL al formulario
     }
-    
-    // Enviar el formulario a Firebase solo después de obtener la URL
-    this.pubService.addPub(this.pubForm.value).subscribe(() => {
-       this.pubForm.reset(); // Limpiar el formulario después de enviar
-       this.closeModal(); 
-    });
+    this.submmitted = !this.submmitted
+    if(!this.isEditing){
+      // Enviar el formulario a Firebase solo después de obtener la URL
+        this.pubService.addPub(this.pubForm.value).subscribe(() => {
+          this.pubForm.reset(); // Limpiar el formulario después de enviar
+          this.submmitted = !this.submmitted
+          this.closeModal(); 
+      });
+    } else{
+      this.pubService.editPub(this.itemIdToEdit, this.pubForm.value).subscribe(() => {
+        this.pubForm.reset(); // Limpiar el formulario después de enviar
+        this.submmitted =!this.submmitted
+        this.closeModal(); 
+      })
+    }
   }
 
   async onFileSelectedToAdd(){

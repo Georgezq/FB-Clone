@@ -55,8 +55,7 @@ export class MainPublicacionesComponent {
   }
 
 
-  sendComment(id: any){
-    
+  sendComment(id: any){    
     if(this.commentControl.value){
       this.publicacionesService.addCommentToPub(id, this.commentControl.value).subscribe();
       this.commentControl.setValue('');
@@ -72,8 +71,6 @@ export class MainPublicacionesComponent {
   openEditModal(item: any = null): void {
     this.editingData = item;    
     this.modalOpen = !this.modalOpen;
-    console.log(this.editingData.imagen_contenido);
-    
   }
 
   closeModal(): void {

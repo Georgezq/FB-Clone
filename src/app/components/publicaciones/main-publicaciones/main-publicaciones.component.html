@@ -124,7 +124,7 @@
         <div class="content my-2 px-2 py-2">
           <p class="mb-2">{{ pub?.texto_contenido }}</p>
           <img
-            *ngIf="pub?.imagen_contenido != null"
+            *ngIf="pub?.imagen_contenido != null && pub?.imagen_contenido.length > 0"
             [src]="pub?.imagen_contenido"
             alt="Foto de la publicacion"
             class="object-cover w-min-[400px] <w-max-full></w-max-full> h-[500px] rounded-md mx-auto"
@@ -207,22 +207,22 @@
                 [src]="userPhoto"
                 class="size-12 rounded-full object-cover"
                 alt="Foto user"
+              />    
+              <input
+              type="text"
+              placeholder="Escribe un comentario..."
+              [formControl]="commentControl"
+              (keydown.enter)="sendComment(pub.id)"
+              class="border border-gray-200 rounded-md w-full px-4 py-2 dark:border-gray-700 dark:text-gray-200"
               />
-              <form
-                (keydown.enter)="sendComment(pub.id)"
-                class="flex flex-row w-full gap-2"
-              >
-                <input
-                  type="text"
-                  placeholder="Escribe un comentario..."
-                  [formControl]="commentControl"
-                  class="border border-gray-200 rounded-md w-full px-4 py-2 dark:border-gray-700 dark:text-gray-200"
-                />
-
-                <button type="button" class="">
+              
+              <button type="submit"
+              
+              (click)="sendComment(pub.id)"
+              class="">
                   <img src="assets/icons/send.svg" class="size-6" alt="" />
                 </button>
-              </form>
+              
             </div>
           </div>
         </div>

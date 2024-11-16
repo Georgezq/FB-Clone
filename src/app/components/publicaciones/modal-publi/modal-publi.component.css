@@ -36,3 +36,7 @@ li:hover{
 textarea{
     box-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) transparent;
 }
+
+.loading{
+    background-color: rgb(255, 255, 255, 0.6);
+}
