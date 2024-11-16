@@ -1,4 +1,4 @@
-<section class="container-fluid w-[67%] p-0 m-auto histories flex flex-row gap-4 ">
+<section class="container-fluid w-[67%] pb-2 m-auto histories flex flex-row gap-4 overflow-x-auto">
   <button class="do-history hover:bg-gray-300 transition" [routerLink]="'/create'">
     <div class="h-[225px] w-[125px] relative rounded-md shadow-md ">
       <div class="header ">
@@ -12,15 +12,17 @@
       </div>
     </div>
   </button>
-  <button class="see-history rounded-md">
+
+
+  <button class="see-history rounded-md flex flex-row gap-4 ">
     <ng-container *ngFor="let sto of contenidoHistorias">
      
         <div class="h-[225px] w-[125px] relative rounded-md shadow-md ">
-          <div class="header absolute border-4 border-bg-accent rounded-full m-1">
+          <div class="header absolute z-50 border-4 border-bg-accent rounded-full m-1">
             <img [src]="sto.user?.foto" class="size-10  rounded-full object-cover " alt="Foto usuario">
           </div>
 
-          <div class="body h-full  rounded">
+          <div class="body h-full rounded hover:scale-105 hover:opacity-75 transition">
             <img [src]="sto.contenido.imagen_contenido" id="imagen-sto" class="rounded h-full object-cover" alt="Historia">
           </div>
           

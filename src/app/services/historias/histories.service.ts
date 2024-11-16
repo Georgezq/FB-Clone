@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { Auth, getAuth } from '@angular/fire/auth';
-import { Firestore, getFirestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, getFirestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { Observable, switchMap, map, combineLatest } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Historias } from 'src/app/models/historias';
@@ -19,6 +19,12 @@ export class HistoriesService {
     this.auth = getAuth(app);
     this.firestore = getFirestore(app);
   }
+
+  addStoryToFirestore(storyData: any) {
+    const storyRef = collection(this.firestore, 'stories');
+    return addDoc(storyRef, storyData);
+  }
+  
 
   // Metodo para crear una publicacion segun el usuario logueado
 
