@@ -5,3 +5,7 @@
 #bubble:hover .item-close{
     display: block;
 }
+
+.sender{
+    justify-content: flex-end;
+}

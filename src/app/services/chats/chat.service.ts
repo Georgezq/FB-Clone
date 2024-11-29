@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { addDoc, collection, collectionData, doc, Firestore, getFirestore, limit, orderBy, query, Timestamp, updateDoc, where } from '@angular/fire/firestore';
-import { concatMap, map, merge, Observable, take } from 'rxjs';
+import { concatMap, map, merge, Observable, of, take, tap } from 'rxjs';
 import { Users } from 'src/app/models/users/users';
 import { AuthService } from '../auth/auth.service';
 import { Chat, Message } from 'src/app/models/chat';
@@ -127,11 +127,19 @@ export class ChatService {
     )
   }
 
-  getChatMessages$(chatId: string): Observable<Message[]>{
-    const ref = collection(this.firestore, 'chats', chatId, 'messages')
-   
-    
-    return collectionData(ref) as Observable<Message[]>
+  getChatMessages$(chatId: any): Observable<Message[]> {
+    console.log('chatId recibido en getChatMessages$:', chatId);
+  
+    if (!chatId || typeof chatId !== 'string') {
+      console.error('chatId inválido:', chatId);
+      return of([]);
+    }
+  
+    chatId = String(chatId); // Asegura que sea una cadena
+    const ref = collection(this.firestore, 'chats', chatId, 'messages');
+    const queryAll = query(ref, orderBy('sendtDate', 'asc'));
+    return collectionData(queryAll, { idField: 'id' }) as Observable<Message[]>;
   }
+  
 
 }

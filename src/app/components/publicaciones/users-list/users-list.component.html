@@ -4,7 +4,7 @@
 
     <mat-selection-list [multiple]="false" [formControl]="chatListControl" class="z-0">
       <mat-list-option  *ngFor="let item of chats$ | async" [value]="item.id">
-        <a
+        <a 
           class="user-item w-100 p-2 flex flex-row items-center gap-3 cursor-pointer hover:bg-bg-text-hover"
         >
           <img
@@ -125,19 +125,21 @@
             </div>
           </div>
         </div>
-        <div class="chat-body p-4" >
+        <div class="chat-body p-4 overflow-y-auto h-[70%]" >
             <ng-container *ngFor="let item of messages$ | async">
-                <div class="flex flex-row items-center gap-2"  >
+                <div class="flex flex-row items-center gap-2 py-1" [ngClass]="{'sender': item.senderId == userId}" >
                   <img
-                    [src]="selectedChats.chatPic"
+                    [src]="item.senderId == userId ? '' : selectedChats.chatPic"
                     class="size-6 object-cover rounded-full"
-                    alt=""
+                    [ngStyle]="{'display': item.senderId != userId ? 'inline' : 'none'}"
+                    alt="user chat sender image"
                   />
                   <span class="p-2 rounded-2xl bg-gray-200 text-dark" >
                     {{ item.text }}
                   </span>
                 </div>
-            </ng-container>
+              </ng-container>
+              <div #endOfChat></div>
             
         </div>
 
@@ -166,14 +168,15 @@
               </button>
             </div>
             <div class="input-message w-2/4">
-              <form (keydown.enter)="sendMessage()">
+             
                 <input
                   type="text"
                   class="rounded-xl bg-bg-cancel w-full border-none active:border-none"
                   [formControl]="messagesControl"
                   placeholder="Aa"
+                  (keydown.enter)="sendMessage()"
                 />
-              </form>
+             
             </div>
             <div class="liked-emoji w-auto">
               <button type="button">
