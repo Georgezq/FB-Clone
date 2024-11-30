@@ -1,10 +1,13 @@
-<section id="login" class="h-svh flex items-center justify-center ">
+<section id="login" class="h-svh flex items-center justify-center">
   <div class="flex text-center w-[1400px]">
-    <div class="flex flex-row ">
+    <div class="flex flex-row">
       <div class="basis-1/2">
         <div class="logo-container flex flex-col items- content-center">
-          <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Logo de facebook"
-            class="img-fluid size-1/2" />
+          <img
+            src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg"
+            alt="Logo de facebook"
+            class="img-fluid size-1/2"
+          />
           <span class="text-3xl text-start text-[#1c1e21]">
             Facebook te ayuda a comunicarte y compartir con las personas que
             forman parte de tu vida.
@@ -14,40 +17,71 @@
 
       <div class="basis-1/2">
         <div class="form-container">
-
-          <section class="card p-3 rounded-2xl shadow-lg w-[540px] mx-auto px-12">
-
+          <section
+            class="card p-3 rounded-2xl shadow-lg w-[540px] mx-auto px-12"
+          >
             <app-error-form
-            [error]="error"
-            [headerError]="'Credenciales incorrectas'"
-            [errorMessage]="'Nombre de usuario o contraseña no válidos'"
+              [error]="error"
+              [headerError]="'Credenciales incorrectas'"
+              [errorMessage]="'Nombre de usuario o contraseña no válidos'"
             />
 
             <form [formGroup]="loginUser" (submit)="loginForm()">
               <div class="mb-3">
-                <input type="text" class="form-control" id="floatingInput" name="email" placeholder="Correo electrónico"
-                  formControlName="email" required />
-                <label class="text-danger fw-normal text-red-700" *ngIf="getError(loginUser.get('email'))">
-                  {{
-                  getError(loginUser.get('email'))
-                  }}
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInput"
+                  name="email"
+                  placeholder="Correo electrónico"
+                  formControlName="email"
+                  required
+                />
+                <label
+                  class="text-danger fw-normal text-red-700"
+                  *ngIf="getError(loginUser.get('email'))"
+                >
+                  {{ getError(loginUser.get("email")) }}
                 </label>
               </div>
               <div class="mb-3">
-                <input type="password" class="form-control" id="floatingPassword" name="password"
-                  placeholder="Contraseña" formControlName="password" required />
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  name="password"
+                  placeholder="Contraseña"
+                  formControlName="password"
+                  required
+                />
               </div>
-              <div class="container-sm mt-10 w-100 flex justify-center items-center flex-col ">
-                <button class="w-full font-bold text-xl bg-[#0866ff] hover:bg-[#084cb1] text-white rounded-md h-12"
-                  type="submit" >Iniciar sesión</button>
-                <button id="forgot_paswd" type="button" (click)="resetPassword()"
-                  class="w-full btn my-3 p-2 rounded-2 border-1 shadow-md text-[#0866ff]  border-white text-primary">¿Has
-                  olvidado la contraseña?</button>
-                <app-register-component />
+              <div
+                class="container-sm mt-10 w-100 flex justify-center items-center flex-col"
+              >
+                <button
+                  class="w-full font-bold text-xl bg-[#0866ff] hover:bg-[#084cb1] text-white rounded-md h-12"
+                  type="submit"
+                >
+                  Iniciar sesión
+                </button>
+                <button
+                  id="forgot_paswd"
+                  type="button"
+                  (click)="resetPassword()"
+                  class="w-full btn my-3 p-2 rounded-2 border-1 shadow-md text-[#0866ff] border-white text-primary"
+                >
+                  ¿Has olvidado la contraseña?
+                </button>
+                <button
+                  type="button"
+                  class="btn-green-fb font-bold text-lg text-white mt-5 p-3 rounded-md"
+                  (click)="openRegisterModal()"
+                >
+                  Crear cuenta nueva
+                </button>
+                <app-register-component [isOpen]="modalOpen" />
               </div>
             </form>
-
-
           </section>
           <div class="mt-4">
             <span>
@@ -57,13 +91,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
-
-
-
-
-
-
-

@@ -14,6 +14,7 @@ export class LoginComponentComponent  {
 
   error: boolean = false;
   loginUser: FormGroup | null ;
+  modalOpen: boolean = false;
 
   constructor(private loginS: AuthService, private router: Router, private fb: FormBuilder,
     private formValid: FormValidators
@@ -21,7 +22,9 @@ export class LoginComponentComponent  {
     this.inicializarForm();
   }
 
-
+  openRegisterModal() {
+    this.modalOpen = !this.modalOpen;
+  }
 
   private inicializarForm(){
     this.loginUser = this.fb.group({

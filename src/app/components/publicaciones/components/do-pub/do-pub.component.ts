@@ -17,16 +17,9 @@ export class DoPubComponent implements OnInit{
   @Input() userPhoto: string = '';
   @Input() loading: boolean = false;
   modalOpen: boolean = false;
-
-  pubForm: FormGroup;
   addFoto: boolean = false;
 
-  constructor(private fb: FormBuilder) {
-  }
-
   ngOnInit(): void {
-       // Inicializar formulario reactivo
-    
   }
 
   openEditModal() {

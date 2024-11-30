@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class RegisterComponentComponent {
 
+  @Input() isOpen: boolean = false;
   registerUser: FormGroup | null ;
-  closeModal: string = '';
   error_tooltip: string = '';
   personalizado: boolean = false;
   generoOptions = [
@@ -42,6 +42,8 @@ export class RegisterComponentComponent {
       generoPersonalizado: [''],
     });
 
+    
+
     // Escuchar cambios en generoSeleccion
     this.registerUser.get('generoSeleccion').valueChanges.subscribe(value => {
       if (value === 'P') {
@@ -70,12 +72,12 @@ export class RegisterComponentComponent {
   }
 
   registerWithEmailAndPassword(){
-    this.closeModal = 'modal';
- 
+    
     if(this.registerUser.valid){
       this.userService.registerForm(this.registerUser.value)
       // limpiar formulario
       this.registerUser.reset();
+      this.isOpen = !this.isOpen;
     } else {
       Object.keys(this.registerUser.controls).forEach(key => {
         const control = this.registerUser.get[key];
@@ -84,6 +86,9 @@ export class RegisterComponentComponent {
     }
   }
 
-  
+  openModal(){
+    this.isOpen = true;
+  }
+
 
 }
