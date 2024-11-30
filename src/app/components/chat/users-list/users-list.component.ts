@@ -74,6 +74,10 @@ export class UsersListComponent implements OnInit{
     console.log(id);
     
   }
+
+  closeChat() {
+    this.chatListControl.setValue([]); // Limpia la selección de chats
+  } 
   
   // Funcion para agregar una nueva burbuja de chat
   

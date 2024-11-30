@@ -26,6 +26,8 @@ export class CreateStoryComponent {
   userId: any;
   fileRef:any;
   url: any;
+  file: any;
+  flag: boolean = false;
 
   constructor(private authService: AuthService, private storage: Storage, private storieService: HistoriesService){
   }
@@ -52,21 +54,25 @@ export class CreateStoryComponent {
 
   onFileSelected(event: any): void {
     this.addStoryWithImage = true;
-    const file = event.target.files[0];
-    if (file && this.isValidImageFile(file)) {
+    this.file = event.target.files[0];
+    if (this.file && this.isValidImageFile(this.file)) {
       const reader = new FileReader();
       
       reader.onload = (e) => {
         this.imageUrl = e.target?.result || null;
       };
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.file);
     } else {
       // Aquí podrías mostrar un mensaje de error al usuario
     }
   }
 
-  async uploadFile(file: any): Promise<void> {
+  async onFileSelectedToAdd(){
+    await this.uploadFile(this.file)
+  }
+
+  async uploadFile(file: File): Promise<void> {
     const filePath = `archivos/${file.name}`;
     this.fileRef = ref(this.storage, filePath);
     
@@ -85,20 +91,21 @@ export class CreateStoryComponent {
         async () => {
           // Obtenemos la URL de descarga una vez finalizada la subida
           this.url = await getDownloadURL(this.fileRef);
-          console.log(this.url);
-          
           resolve(); // Resolvemos la promesa cuando la URL está lista
         }
       );
     });
   }
 
-  async onFileSelectedToAdd(){
-    await this.uploadFile(this.imageUrl)
-  }
-
   async publishStoryWithImage() {
     try {
+      if (this.file) {
+        await this.onFileSelectedToAdd(); // Esperar a que la imagen se suba y obtener la URL
+        this.imagenHistoria.patchValue(this.url); // Asignar la URL al formulario
+        this.addStoryWithImage = false; // Cerramos el modal de publicación con imagen
+        this.flag = true; 
+      }
+      
            
       const storyData = {
         tipoHistoria: "Imagen",

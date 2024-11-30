@@ -39,7 +39,7 @@
         <span class="text-2xl font-bold">Tu historia</span>
       </div>
       <div class="user flex flex-row items-center gap-5">
-        <img [src]="foto" class="size-14 rounded-full object-cover" alt="" />
+        <img [src]="foto" class="size-14 rounded-full object-cover" appDefaultImage alt=" user image " />
         <span class="text-lg"> {{ nombre + " " + apellidos }} </span>
       </div>
     </div>
@@ -139,7 +139,7 @@
       </div>
 
       <div class="opt-buttons flex flex-row justify-center items-end my-10 gap-x-6">
-        <button type="button" class="bg-bg-cancel px-4 py-2 rounded-md">
+        <button type="button" [routerLink]="'/home'" class="bg-bg-cancel px-4 py-2 rounded-md">
           Descartar
         </button>
         <button
@@ -156,13 +156,14 @@
 
     <ng-container *ngIf="addStoryWithImage">
         <div class="opt-buttons flex flex-row justify-center items-end my-10 gap-x-6">
-            <button type="button" class="bg-bg-cancel px-4 py-2 rounded-md">
+            <button type="button" [routerLink]="'/home'" class="bg-bg-cancel px-4 py-2 rounded-md">
               Descartar
             </button>
             <button
               type="button"
               class="bg-bg-accent rounded-md px-4 py-2 text-white"
               (click)="publishStoryWithImage()"
+              [disabled]="flag"
             >
               Compartir en historia
             </button>
@@ -198,6 +199,7 @@
         />
       </div>
     </label>
+    <!--
     <button
       type="button"
       (click)="seeAddStoryWithText()"
@@ -213,7 +215,7 @@
           >Crear una historia con texto</span
         >
       </div>
-    </button>
+    </button> -->
   </div>
 </ng-container>
 
@@ -256,7 +258,7 @@
         <div class="background rounded-lg h-[90%] w-2/4">
           <img
             [src]="imageUrl"
-            class="h-full object-cover"
+            class="h-full object-contain"
             alt="preview de la foto"
           />
         </div>

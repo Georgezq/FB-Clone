@@ -28,17 +28,18 @@ import { MainPublicacionesComponent } from './components/publicaciones/main-publ
 import { ForgotPasswdComponent } from './auth/forgot-passwd/forgot-passwd.component';
 import { ErrorFormComponent } from './core/components/error-form/error-form.component';
 import { TooltipMessageComponent } from './core/components/tooltip-message/tooltip-message.component';
-import { UsersListComponent } from './components/publicaciones/users-list/users-list.component';
+import { UsersListComponent } from './components/chat/users-list/users-list.component';
 
 import {MatListModule} from '@angular/material/list';
-import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { SidebarComponent } from './components/profile-sidebar/sidebar/sidebar.component';
 import { DateDisplayPipe } from './core/pipes/date-display.pipe';
 import { DatePipe } from '@angular/common';
-import { DoPubComponent } from './components/publicaciones/do-pub/do-pub.component';
-import { CreateStoryComponent } from './components/pages/create-story/create-story.component';
-import { ModalPubliComponent } from './components/publicaciones/modal-publi/modal-publi.component';
+import { DoPubComponent } from './components/publicaciones/components/do-pub/do-pub.component';
+import { CreateStoryComponent } from './components/historias/components/create-story/create-story.component';
+import { ModalPubliComponent } from './components/publicaciones/components/modal-publi/modal-publi.component';
+import { DefaultImageDirective } from './core/directives/default-image.directive';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ModalPubliComponent } from './components/publicaciones/modal-publi/moda
     DoPubComponent,
     CreateStoryComponent,
     ModalPubliComponent,
+    DefaultImageDirective,
   ],
   imports: [
     BrowserModule,

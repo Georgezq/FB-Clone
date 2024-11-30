@@ -2,7 +2,7 @@
   <button class="do-history hover:bg-gray-300 transition" [routerLink]="'/create'">
     <div class="h-[225px] w-[125px] relative rounded-md shadow-md ">
       <div class="header ">
-        <img [src]="userPhoto" class="rounded-tl rounded-tr w-full object-cover h-[150px] hover:bg-gray-300 transition" alt="Foto usuario">
+        <img [src]="userPhoto" appDefaultImage class="rounded-tl rounded-tr w-full object-cover h-[150px] hover:bg-gray-300 transition" alt="Foto usuario">
       </div>
       <div class="body absolute top-32 right-1/3  rounded-full border-4 border-white hover:bg-gray-300 transition">
         <img src="assets/icons/plus_circle.svg" class="size-8 bg-bg-accent rounded-full " alt="plus_circle">
@@ -18,8 +18,8 @@
     <ng-container *ngFor="let sto of contenidoHistorias">
      
         <div class="h-[225px] w-[125px] relative rounded-md shadow-md ">
-          <div class="header absolute z-50 border-4 border-bg-accent rounded-full m-1">
-            <img [src]="sto.user?.foto" class="size-10  rounded-full object-cover " alt="Foto usuario">
+          <div class="header absolute z-20 border-4 border-bg-accent rounded-full m-1">
+            <img [src]="sto.user?.foto" appDefaultImage class="size-10 rounded-full object-cover " alt="Foto usuario">
           </div>
 
           <div class="body h-full rounded hover:scale-105 hover:opacity-75 transition">
