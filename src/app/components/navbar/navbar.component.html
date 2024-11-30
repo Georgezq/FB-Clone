@@ -94,6 +94,13 @@
                   </a>
                 </div>
               </ng-container>
+              <div class="p-2 my-1 w-11/12 mx-auto">
+                <a (click)="logout()" [ngStyle]="{'cursor': navbarMenuActive ? 'pointer' : 'default'}"
+                  class="flex w-100 items-center justify-start gap-5 py-2 rounded-md">
+                  <img src="assets/icons/nav-icons/profile-icons/leave.svg" class="size-7">
+                  <span class="w-100 text-primary-text font-medium text-md break-words">Cerrar sesión</span>
+                </a>
+              </div>
             </div>
           </ng-template>
           </div>

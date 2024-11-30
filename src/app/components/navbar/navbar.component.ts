@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Users } from 'src/app/models/users/users';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -81,10 +82,9 @@ export class NavbarComponent {
     { texto: 'Ayuda y soporte técnico', icon: 'assets/icons/nav-icons/profile-icons/help.svg', },
     { texto: 'Pantalla y accesibilidad', icon: 'assets/icons/nav-icons/profile-icons/accesibilidad.svg', },
     { texto: 'Enviar comentarios', icon: 'assets/icons/nav-icons/profile-icons/comentarios.svg', },
-    { texto: 'Cerrar sesión', icon: 'assets/icons/nav-icons/profile-icons/leave.svg', },
   ]
 
-  constructor(private elementRef: ElementRef, private storageService: StorageService, private AuthService: AuthService){
+  constructor(private elementRef: ElementRef, private storageService: StorageService, private authService: AuthService, private router: Router){
     const currentUser = JSON.parse(localStorage.getItem('currenUser')!);
     this.userId = currentUser.uid;
   }
@@ -92,6 +92,11 @@ export class NavbarComponent {
   searchClicked(event: Event): void {
     event.stopPropagation();
     this.isSearchClicked =!this.isSearchClicked;
+  }
+
+  logout(){
+    this.authService.signOut();
+    this.router.navigateByUrl('login');
   }
 
   menuClicked(event: Event): void {
@@ -122,7 +127,7 @@ export class NavbarComponent {
       password: 'georgio123',
       foto: this.userId + '.jpg',
     }
-    this.AuthService.updateProfileFireStore(this.userId, update)
+    this.authService.updateProfileFireStore(this.userId, update)
   }
 
 }

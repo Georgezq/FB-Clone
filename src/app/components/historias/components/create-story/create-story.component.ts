@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ref, uploadBytesResumable, getDownloadURL, Storage, uploadBytes } from '@angular/fire/storage';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { HistoriesService } from 'src/app/services/historias/histories.service';
 
@@ -29,7 +30,7 @@ export class CreateStoryComponent {
   file: any;
   flag: boolean = false;
 
-  constructor(private authService: AuthService, private storage: Storage, private storieService: HistoriesService){
+  constructor(private authService: AuthService, private storage: Storage, private storieService: HistoriesService, private router: Router){
   }
 
   ngOnInit() {
@@ -118,6 +119,7 @@ export class CreateStoryComponent {
       };
   
       await this.storieService.addStoryToFirestore(storyData);
+      this.router.navigate(['home'])
     } catch (error) {
       console.error('Error al subir la historia:', error);
       

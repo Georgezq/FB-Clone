@@ -168,5 +168,19 @@ export class AuthService {
     const queryAll = query(ref);
     return collectionData(queryAll) as Observable<Users[]>;
   }
+
+  isLogged(): boolean {
+    const verifyToken = localStorage.getItem('currenUser');
+    if(verifyToken){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  signOut() {
+    localStorage.removeItem('currenUser');
+  }
+  
   
 }
