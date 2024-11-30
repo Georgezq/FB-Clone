@@ -1,5 +1,5 @@
 <nav>
-  <div class="grid grid-cols-3 grid-flow-col gap-10 w-full p-1">
+  <div class="grid grid-cols-1 md:grid-cols-3 grid-flow-col gap-10 w-full p-1">
 
     <!-- Parte de la izquierda del menu -->
     <div class="search-item flex flex-row items-center content-center">
@@ -9,9 +9,9 @@
         <img src="assets/icons/nav-icons/arrow_right.svg" [@openClose]="isSearchClicked ? 'open' : 'closed'"
           class="size-6" (click)="isSearchClicked = false" alt="Buscar">
       </a>
-      <img id="search_ic" class="size-6 text-gray-200" [@openClose]="!isSearchClicked ? 'open' : 'closed'"
+      <img id="search_ic" class="size-6 md:block hidden text-gray-200" [@openClose]="!isSearchClicked ? 'open' : 'closed'"
         alt="search_svg" src="assets/icons/search_svg.svg" />
-      <input id="search_btn" placeholder="Buscar en Facebook" [@paddingL]="!isSearchClicked ? 'whPd' : 'wiPd'"
+      <input id="search_btn" class="w-full " placeholder="Buscar en Facebook" [@paddingL]="!isSearchClicked ? 'whPd' : 'wiPd'"
         (click)="searchClicked($event)">
     </div>
 

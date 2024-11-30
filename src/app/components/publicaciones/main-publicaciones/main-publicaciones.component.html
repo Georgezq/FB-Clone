@@ -1,5 +1,5 @@
 <ng-container *ngFor="let pub of contenidoPublicacion; let i = index">
-  <section class="container-fluid w-4/6 p-0 m-auto shadow-md publicacion-user">
+  <section class="container-fluid md:w-4/6 w-full p-0 m-auto shadow-md publicacion-user">
     <ng-template [ngIf]="!loadingPublicaciones">
       <div
         role="status"
@@ -141,7 +141,7 @@
                 type="button"
                 class="flex flex-row gap-1 items-center hover:bg-gray-200/80 transition w-auto rounded-lg px-4 py-2"
               >
-                <img src="assets/icons/like.svg" class="size-6" alt="like" />
+                <img src="assets/icons/like.svg" class="size-6 md:block hidden" alt="like" />
                 Me gusta
               </button>
               <button
@@ -149,7 +149,7 @@
               >
                 <img
                   src="assets/icons/comment.svg"
-                  class="size-6"
+                  class="size-6 md:block hidden"
                   alt="comentarios"
                 />
                 Comentar
@@ -159,7 +159,7 @@
               >
                 <img
                   src="assets/icons/shared.svg"
-                  class="size-6"
+                  class="size-6 md:block hidden"
                   alt="comentarios"
                 />
                 Enviar
@@ -169,7 +169,7 @@
               >
                 <img
                   src="assets/icons/whatsapp.svg"
-                  class="size-6"
+                  class="size-6 md:block hidden"
                   alt="comentarios"
                 />
                 Compartir
