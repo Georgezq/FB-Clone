@@ -128,10 +128,8 @@ export class ChatService {
   }
 
   getChatMessages$(chatId: any): Observable<Message[]> {
-    console.log('chatId recibido en getChatMessages$:', chatId);
   
     if (!chatId || typeof chatId !== 'string') {
-      console.error('chatId inválido:', chatId);
       return of([]);
     }
   
@@ -140,6 +138,22 @@ export class ChatService {
     const queryAll = query(ref, orderBy('sendtDate', 'asc'));
     return collectionData(queryAll, { idField: 'id' }) as Observable<Message[]>;
   }
+
+  isExistingChat(otherUserId: string): Observable<string | null> {
+    return this.myChats$.pipe(
+      take(1),
+      map(chats => {
+
+        for(let i=0; i < chats.length; i++) {
+          if(chats[i].userIds.includes(otherUserId)){
+            return chats[i].id;
+          }
+        }
+        return null;
+      })
+    )
+  } 
+
   
 
 }

@@ -1,5 +1,24 @@
 <div class="container ms-auto w-3/4 md:block hidden">
-  <div class="user-list w-100 flex flex-col mt-5 ms-5">
+
+  <div class="search-input mt-5 ms-5">
+    <mat-form-field> 
+      <input 
+        matInput
+        placeholder="Buscar usuarios..."
+        [formControl]="searchControl"
+        [matAutocomplete]="users"
+      />
+    </mat-form-field>
+    <mat-autocomplete #users="matAutocomplete">
+      <mat-option 
+        *ngFor="let user of users$ | async" 
+        (click)="createChat(user)">
+        {{ user?.nombre }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <div class="user-list w-100 flex flex-col ms-5">
     <span class="font-medium my-2">Contactos</span>
 
     <mat-selection-list [multiple]="false" [formControl]="chatListControl" class="z-0">
@@ -11,6 +30,7 @@
             [src]="item.chatPic"
             class="size-8 rounded-full object-cover"
             alt="Imagen del usuario"
+            appDefaultImage
           />
           <div class="">
             <div class="font-medium text-gray-700 dark:text-gray-200">
@@ -45,6 +65,8 @@
     </ng-template>
   </div>
 
+ 
+
   <!-- SECCION PARA LA BURBUJA DEL CHAT -->
 
   <div
@@ -63,6 +85,7 @@
             <img
               class="size-12 rounded-full object-cover"
               [src]="usuario.foto"
+              appDefaultImage
             />
             <button
               (click)="deleteBubbleChat(usuario.id_user)"
@@ -97,6 +120,7 @@
                 class="size-10 rounded-full object-cover"
                 [src]="selectedChats.chatPic"
                 alt=""
+                appDefaultImage
               />
               <span
                 class="bottom-2 left-8 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"
@@ -133,6 +157,7 @@
                     class="size-6 object-cover rounded-full"
                     [ngStyle]="{'display': item.senderId != userId ? 'inline' : 'none'}"
                     alt="user chat sender image"
+                    appDefaultImage
                   />
                   <span class="p-2 rounded-2xl bg-gray-200 text-dark" >
                     {{ item.text }}

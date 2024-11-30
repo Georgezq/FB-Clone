@@ -6,7 +6,7 @@
 />
 <div class="flex flex-row pb-10" id="main">
   <div class="basis-1/4">
-    <app-sidebar 
+    <app-sidebar
       [userName]="nombre"
       [lastName]="apellidos"
       [userPhoto]="foto"
@@ -14,26 +14,21 @@
     />
   </div>
   <div class="md:basis-1/2 basis-full">
+    <app-do-pub [userName]="nombre" [lastName]="apellidos" [userPhoto]="foto" />
 
-    <app-do-pub
-    [userName]="nombre"
-    [lastName]="apellidos"
-    [userPhoto]="foto"
-    />
-    
-    <app-historias 
-     [userPhoto]="foto"
-    />
-    
+    <app-historias [userPhoto]="foto" />
+
     <app-main-publicaciones
-    [userName]="nombre"
-    [lastName]="apellidos"
-    [userPhoto]="foto"
-    [loading]="loading"
-    [userId]="userId"
+      [userName]="nombre"
+      [lastName]="apellidos"
+      [userPhoto]="foto"
+      [loading]="loading"
+      [userId]="userId"
     />
   </div>
   <div class="basis-1/4">
-    <app-users-list [otherUsers]="otherUsers" [loading]="loading" [userPhoto]="foto" [userId]="userId" />
+    <app-users-list
+      [loading]="loading"
+    />
   </div>
 </div>

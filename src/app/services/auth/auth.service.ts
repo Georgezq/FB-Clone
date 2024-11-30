@@ -162,5 +162,11 @@ export class AuthService {
     return updateProfile(this.auth.currentUser, {photoURL: user.foto })
   }
   
+
+  get allUsers$(): Observable<Users[]> {
+    const ref = collection(this.firestore, 'users');
+    const queryAll = query(ref);
+    return collectionData(queryAll) as Observable<Users[]>;
+  }
   
 }

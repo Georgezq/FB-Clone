@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: AuthService){}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.obtenerDatosUsuarioLogueado();
     this.obtenerUsuarios();
   }

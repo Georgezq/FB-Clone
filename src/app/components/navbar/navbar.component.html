@@ -54,7 +54,7 @@
 
           <a class="cursor-pointer" (click)="menuClicked($event)">
             <ng-template [ngIf]="loading">
-              <img [src]="userPhoto" class="rounded-full size-12 object-cover" alt="Usuario">
+              <img [src]="userPhoto" class="rounded-full size-12 object-cover" appDefaultImage alt="Usuario">
             </ng-template>
 
             <!-- Skeleton -->
@@ -79,7 +79,7 @@
             <div class="w-11/12 cursor-pointer mx-auto my-2 rounded-lg shadow-xl p-2 bg-white/30">
               <a id="menu-profile" [ngStyle]="{'cursor': navbarMenuActive ? 'pointer' : 'default'}"
                 class="flex w-100 items-center justify-start gap-5">
-                <img [src]="userPhoto" class="rounded-full size-12 object-cover" alt="">
+                <img [src]="userPhoto" class="rounded-full size-12 object-cover" appDefaultImage alt="">
                 <span class="w-100 text-primary-text font-semibold text-lg"> {{ name + ' ' + lastName }} </span>
               </a>
             </div>

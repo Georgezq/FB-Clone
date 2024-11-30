@@ -40,6 +40,9 @@ import { DoPubComponent } from './components/publicaciones/components/do-pub/do-
 import { CreateStoryComponent } from './components/historias/components/create-story/create-story.component';
 import { ModalPubliComponent } from './components/publicaciones/components/modal-publi/modal-publi.component';
 import { DefaultImageDirective } from './core/directives/default-image.directive';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { DefaultImageDirective } from './core/directives/default-image.directive
     HttpClientModule,
     MatListModule,  
     MatTooltipModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
