@@ -38,7 +38,11 @@ export const environment = {
 
 ## Un vistazo a la aplicación
 
-Algunos de los aspectos propios del acceso a Fb se mantienen. (Sección funcional!)
+Algunos de los aspectos propios del acceso a Fb se mantienen.
+
+Un usuario disponible para probar es el siguiente:
+Correo: johndoe@hotmail.com
+Contraseña: 12345678
 
 ![imagen](https://github.com/user-attachments/assets/7f62a023-dfaa-4106-8349-4770ddb44bd9)
 
