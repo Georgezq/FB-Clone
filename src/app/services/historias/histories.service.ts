@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { Auth, getAuth } from '@angular/fire/auth';
-import { Firestore, getFirestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
+import { Firestore, getFirestore, collection, collectionData, addDoc, orderBy, query } from '@angular/fire/firestore';
 import { Observable, switchMap, map, combineLatest } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Historias } from 'src/app/models/historias';
@@ -30,7 +30,8 @@ export class HistoriesService {
 
   getHistories(): Observable<Historias[]> {
     const ref = collection(this.firestore, 'stories');
-    return collectionData(ref, { idField: 'id' }) as Observable<Historias[]>;
+    const queryAll = query(ref, orderBy('fechaPublicacion', 'desc'));
+    return collectionData(queryAll, { idField: 'id' }) as Observable<Historias[]>;
   }
 
   getHistoriesWithUser(): Observable<Historias[]> {
