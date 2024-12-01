@@ -23,7 +23,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getStorage, provideStorage  } from '@angular/fire/storage';
-import { environment } from 'src/environments/enviroments';
+import { environment } from 'src/environments/environment';
 import { MainPublicacionesComponent } from './components/publicaciones/main-publicaciones/main-publicaciones.component';
 import { ForgotPasswdComponent } from './auth/forgot-passwd/forgot-passwd.component';
 import { ErrorFormComponent } from './core/components/error-form/error-form.component';
