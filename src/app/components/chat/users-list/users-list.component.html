@@ -1,4 +1,4 @@
-<div class="container ms-auto w-3/4 md:block hidden">
+<div class="container ms-auto w-3/4 lg:block hidden ">
 
   <div class="search-input mt-5 ms-5 w-100">
     <mat-form-field> 
@@ -22,10 +22,10 @@
     </mat-autocomplete>
   </div>
 
-  <div class="user-list w-100 flex flex-col ms-5">
+  <div class="user-list w-100 flex flex-col ms-5 -z-30">
     <span class="font-medium my-2">Contactos</span>
 
-    <mat-selection-list [multiple]="false" [formControl]="chatListControl" class="z-0">
+    <mat-selection-list [multiple]="false" [formControl]="chatListControl" >
       <mat-list-option  *ngFor="let item of chats$ | async" [value]="item.id">
         <a 
           class="user-item w-100 p-2 flex flex-row items-center gap-3 cursor-pointer hover:bg-bg-text-hover"
@@ -110,15 +110,15 @@
   </div>
 
   <div
-    class="chat-window fixed right-20 bottom-0 flex flex-row gap-6"
+    class="chat-window fixed right-20 bottom-0 flex flex-row gap-6 z-50"
     *ngIf="selectedChats$ | async as selectedChats"
   >
     <ng-container>
       <div class="chat shadow-lg h-[400px] w-[325px] rounded-lg border">
         <div
-          class="chat-header border-b shadow h-[55px] flex flex-row items-center justify-between"
+          class="chat-header border-b shadow h-[55px] bg-main-white flex flex-row items-center justify-between"
         >
-          <div class="info-userChat flex flex-row items-center">
+          <div class="info-userChat bg-main-white flex flex-row items-center">
             <div class="relative p-2">
               <img
                 class="size-10 rounded-full object-cover"
@@ -153,7 +153,7 @@
             </div>
           </div>
         </div>
-        <div class="chat-body p-4 overflow-y-auto h-[70%]" >
+        <div class="chat-body p-4 overflow-y-auto bg-main-white h-[70%]" >
             <ng-container *ngFor="let item of messages$ | async">
                 <div class="flex flex-row items-center gap-2 py-1" [ngClass]="{'sender': item.senderId == userId}" >
                   <img

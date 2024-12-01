@@ -49,6 +49,12 @@ export class UsersListComponent implements OnInit{
   ngOnInit() {
     this.obtenerDatosUsuarioLogueado();
     this.obtenerCambios();
+    window.addEventListener('scroll', this.checkScrollPosition.bind(this));
+
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.checkScrollPosition.bind(this));
   }
 
   selectedChats$ = combineLatest([
@@ -134,6 +140,15 @@ export class UsersListComponent implements OnInit{
         this.endOfChat.nativeElement.scrollIntoView({ behavior:'smooth' });
       }
     },100)
+  }
+
+  checkScrollPosition() {
+    const scrollPosition = window.scrollY; // Posición vertical del scroll
+    const triggerHeight = 998; // Cambia este valor al que prefieras
+  
+    if (scrollPosition >= triggerHeight) {
+      this.closeChat();
+    }
   }
 
 }
